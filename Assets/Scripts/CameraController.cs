@@ -5,7 +5,10 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public float MouseSensitivity = 10;
+    public float SmoothingSpeed = 2;
     private float xRotation = 0;
+    private float yRotation = 0;
+    private float yTargetRotation = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -19,9 +22,14 @@ public class CameraController : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X") * MouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * MouseSensitivity;
 
-        xRotation = Mathf.Clamp(xRotation - mouseY, -90, 90);
+        yTargetRotation = Mathf.Clamp(yTargetRotation - mouseY, -90, 90);
 
-        transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
-        transform.parent.transform.Rotate(Vector3.up * mouseX);
+        xRotation = Mathf.Lerp(xRotation, mouseX, SmoothingSpeed * Time.deltaTime);
+        yRotation = Mathf.Lerp(yRotation, yTargetRotation, SmoothingSpeed * Time.deltaTime);
+
+
+        transform.localRotation = Quaternion.Euler(transform.localRotation.y + yRotation, 0, 0);
+        Debug.Log(yRotation);
+        transform.parent.transform.Rotate(Vector3.up * xRotation);
     }
 }
