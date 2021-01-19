@@ -29,7 +29,6 @@ public class CameraController : MonoBehaviour
 
 
         transform.localRotation = Quaternion.Euler(transform.localRotation.y + yRotation, 0, 0);
-        Debug.Log(yRotation);
         transform.parent.transform.Rotate(Vector3.up * xRotation);
     }
 }

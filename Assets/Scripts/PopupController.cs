@@ -35,6 +35,10 @@ public class PopupController : MonoBehaviour
     //The size of the background when the player is at a distance and it only fits the heading
     private Vector3 minBackgroundScale;
 
+    //Controls whether a user can click on this pop up to make it show a link
+    public bool IsInteractable = false; //Can they?
+    public string InteractableLink; //Link to show
+
     // Start is called before the first frame update
     void Start()
     {
