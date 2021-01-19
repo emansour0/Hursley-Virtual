@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    public float InteractionDistance = 0.5f;
+    public float InteractionDistance = 2;
     public int InteractableLayer = 9;
 
 
@@ -18,10 +18,9 @@ public class PlayerInteraction : MonoBehaviour
     {
         int mask = 1 << InteractableLayer;
 
-        RaycastHit hit;
         Ray forwardRay = new Ray(transform.position, transform.forward);
 
-        if (Physics.Raycast(forwardRay, out hit, InteractionDistance, mask))
+        if (Physics.Raycast(forwardRay, out RaycastHit hit, InteractionDistance, mask))
         {
             //If the object hit was a pop up and the user clicked the mouse (0 corresponds to the left button on the mouse)
             if(hit.collider.CompareTag("Pop Up") && Input.GetMouseButtonDown(0))

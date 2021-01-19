@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         //If the character is not on the ground (in the air), then deccelerate their upwards speed
         else
         {
-            yMovement -= _gravity;
+            yMovement -= _gravity * Time.deltaTime;
         }
 
         Vector3 movement = transform.right * xMovement + transform.forward * zMovement + transform.up * yMovement;

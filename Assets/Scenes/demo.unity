@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 577ede36a560bc444901b00f5f77e4f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MouseSensitivity: 6
+  MouseSensitivity: 3
   SmoothingSpeed: 5
 --- !u!114 &226295743
 MonoBehaviour:
@@ -389,7 +389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementSpeed: 4
-  _gravity: 0.2
+  _gravity: 30
   _jumpForce: 10
   mouseSensitivity: 2
 --- !u!4 &446959706
@@ -1060,6 +1060,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 953614858942737478, guid: 438705fda4bc2a546900bb83b7189840,
+        type: 3}
+      propertyPath: IsInteractable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 953614858942737478, guid: 438705fda4bc2a546900bb83b7189840,
+        type: 3}
+      propertyPath: InteractableLink
+      value: https://visithursley.eu-gb.mybluemix.net/
       objectReference: {fileID: 0}
     - target: {fileID: 953614858942737479, guid: 438705fda4bc2a546900bb83b7189840,
         type: 3}

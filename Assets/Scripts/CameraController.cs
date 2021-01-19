@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float MouseSensitivity = 10;
+    public float MouseSensitivity = 3;
     public float SmoothingSpeed = 2;
     private float xRotation = 0;
     private float yRotation = 0;
