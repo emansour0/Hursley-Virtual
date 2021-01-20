@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
@@ -22,6 +23,7 @@ public class PlayerInteraction : MonoBehaviour
 
         if (Physics.Raycast(forwardRay, out RaycastHit hit, InteractionDistance, mask))
         {
+#if !UNITY_EDITOR
             //If the object hit was a pop up and the user clicked the mouse (0 corresponds to the left button on the mouse)
             if(hit.collider.CompareTag("Pop Up") && Input.GetMouseButtonDown(0))
             {
@@ -30,9 +32,13 @@ public class PlayerInteraction : MonoBehaviour
                 //If this pop up was declared as interactable when clicked, then open the link given
                 if(popUpController.IsInteractable)
                 {
-                    Application.OpenURL(popUpController.InteractableLink);
+                    openWindow(popUpController.InteractableLink);
                 }
             }
+#endif
         }
     }
+
+    [DllImport("__Internal")]
+    private static extern void openWindow(string url);
 }
