@@ -195,7 +195,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 953614858942737477}
-  - component: {fileID: 953614858942737478}
+  - component: {fileID: 311829675239012320}
   m_Layer: 9
   m_Name: Button Popup
   m_TagString: Pop Up
@@ -220,7 +220,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &953614858942737478
+--- !u!114 &311829675239012320
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -236,6 +236,9 @@ MonoBehaviour:
   VisibilityRadius: 5
   ContentRadius: 2
   PlayerHeightOffset: 0.5
+  HorizontalMargin: 0.2
+  VerticalMargin: 0.1
+  SpacingBetweenHeadingAndContent: 0.1
   RotationSpeed: 3
   BackgroundExpansionSpeed: 2
   Background: {fileID: 953614859181566648}
@@ -243,11 +246,6 @@ MonoBehaviour:
   Content: {fileID: 953614857741681385}
   HeadingText: {fileID: 953614857790005950}
   ContentText: {fileID: 953614857741681399}
-  CharactersPerWidth: 25
-  HeadingLineHeight: 0
-  ContentLineHeight: 0
-  SpacingBeforeContent: 0
-  SpacingAroundHeader: 0
   IsInteractable: 0
   InteractableLink: 
 --- !u!1 &953614859181566649

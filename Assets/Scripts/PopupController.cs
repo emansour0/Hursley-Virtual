@@ -10,6 +10,9 @@ public class PopupController : MonoBehaviour
     public int ContentRadius = 2;
 
     public float PlayerHeightOffset = 0.5f; //Offset along y axis so that pop ups angle slightly upwards towards the player head
+    public float HorizontalMargin = 0.2f;
+    public float VerticalMargin = 0.1f;
+    public float SpacingBetweenHeadingAndContent = 0.1f;
 
     public int RotationSpeed = 3;
     public int BackgroundExpansionSpeed = 2;
@@ -21,16 +24,8 @@ public class PopupController : MonoBehaviour
     public TextMesh HeadingText;
     public TextMesh ContentText;
 
-    //The number of characters which are displayable in a width of 1 unit
-    public int CharactersPerWidth = 16;
-
-    //Heights of a line of text in Unity units, used for scaling
-    public float HeadingLineHeight = 0.1f;
-    public float ContentLineHeight = 0.1f;
-
-    //Margin between the heading and content
-    public float SpacingBeforeContent = 0.1f;
-    public float SpacingAroundHeader = 0.1f;
+    private Vector3 headingSize;
+    private Vector3 contentSize;
 
     //The size of the background when the player is at a distance and it only fits the heading
     private Vector3 minBackgroundScale;
@@ -42,10 +37,15 @@ public class PopupController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Gets the size in Unity dimensions of both 
+        headingSize = HeadingText.GetComponent<MeshRenderer>().bounds.size;
+        contentSize = ContentText.GetComponent<MeshRenderer>().bounds.size;
+
         scaleInitialBackground();
 
+        //Place the content text in line with the heading but move it down so that the content fits below it
         Vector3 contentPos = Content.transform.position;
-        contentPos.y = Heading.position.y - (SpacingBeforeContent + HeadingLineHeight * getNumberOfLines(HeadingText));
+        contentPos.y = Heading.position.y - (contentSize.y * 0.5f + headingSize.y * 0.5f + SpacingBetweenHeadingAndContent);
         Content.transform.position = contentPos;
     }
 
@@ -93,9 +93,10 @@ public class PopupController : MonoBehaviour
     //Scales the background to its initial size (only the Header shown)
     private void scaleInitialBackground()
     {
-        float width = (float) HeadingText.text.Length / (float) CharactersPerWidth;
-        float height = SpacingAroundHeader + getNumberOfLines(HeadingText) * (float) HeadingLineHeight;
+        float width = contentSize.x < headingSize.x ? headingSize.x + HorizontalMargin : contentSize.x + HorizontalMargin;
+        float height = headingSize.y + VerticalMargin * 0.5f;
 
+        //Height is in the z axis because the plane is rotated, so z is the height and x is the width
         Background.localScale = new Vector3(width, 1, height);
         minBackgroundScale = Background.localScale;
 
@@ -108,7 +109,7 @@ public class PopupController : MonoBehaviour
         Content.SetActive(true); //Display content text
 
         //Increase background height by ContentLineHeight for every line of text
-        float height = (float) getNumberOfLines(ContentText) * (float) ContentLineHeight;
+        float height = contentSize.y + SpacingBetweenHeadingAndContent + VerticalMargin * 0.5f;
 
         Vector3 targetSize = minBackgroundScale;
         targetSize.z += height;

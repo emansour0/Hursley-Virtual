@@ -20,7 +20,7 @@ public class PlayerInteraction : MonoBehaviour
 
     }
 
-    void FixedUpdate()
+    void Update()
     {
         int popupMask = 1 << PopupLayer;
         int ButtonMask = 1 << ButtonLayer;
@@ -46,20 +46,13 @@ public class PlayerInteraction : MonoBehaviour
         }
         if (Physics.Raycast(forwardRay, out hit, InteractionDistance, ButtonMask))
         {
+            ButtonController buttonController = hit.collider.GetComponent<ButtonController>();
+
+            buttonController.OnHover(transform);
+
             if (Input.GetMouseButtonDown(0))
             {
-                Animator anim = hit.collider.GetComponent<Animator>();
-                anim.SetTrigger("button_pressed");
-            }
-            else
-            {
-                if (popup == null)
-                {
-                    Vector3 popupPosition = hit.collider.gameObject.transform.GetChild(0).transform.position;
-                    popup = Instantiate(PopupTextPrefab, popupPosition, Quaternion.Euler(new Vector3(0, 0, 0)));
-                    Quaternion rotationToPlayer = popup.GetComponent<PopupController>().findRotationToPlayer(transform);
-                    popup.transform.rotation = rotationToPlayer;
-                }
+                buttonController.OnClick();
             }
         }
         else
