@@ -65,24 +65,29 @@ public class PopupController : MonoBehaviour
         else
         {
             Background.localScale = Vector3.Slerp(Background.localScale, minBackgroundScale, BackgroundExpansionSpeed * Time.deltaTime);
-            Background.position = Vector3.Slerp(Background.position, Heading.position, BackgroundExpansionSpeed * Time.deltaTime);
+            Vector3 originalPosition = Heading.position;
+            originalPosition.z = Background.position.z;
+            Background.position = Vector3.Slerp(Background.position, originalPosition, BackgroundExpansionSpeed * Time.deltaTime);
             Content.SetActive(false);
         }
     }
 
     //Rotates the text to face the direction of the player
-    private void rotateToPlayer(Transform player)
+    public void rotateToPlayer(Transform player)
     {
-            Vector3 targetPosition = transform.position;
-            targetPosition.y -= PlayerHeightOffset;
+        transform.rotation = Quaternion.Slerp(transform.rotation, findRotationToPlayer(player), RotationSpeed * Time.deltaTime);
+    }
 
-            Vector3 relativePos = targetPosition - player.position;
+    public Quaternion findRotationToPlayer(Transform player)
+    {
+        Vector3 targetPosition = transform.position;
+        targetPosition.y -= PlayerHeightOffset;
 
-            //Multiplying Quaternions is equivalent to combining them
-            //Here, an extra -90 degree rotation is applied on the X, so that the plane faces forward
-            Quaternion rotationToPlayer = Quaternion.LookRotation(relativePos) * Quaternion.Euler(-90, 0, 0);
+        Vector3 relativePos = targetPosition - player.position;
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotationToPlayer, RotationSpeed * Time.deltaTime);
+        //Multiplying Quaternions is equivalent to combining them
+        //Here, an extra -90 degree rotation is applied on the X, so that the plane faces forward
+        return Quaternion.LookRotation(relativePos) * Quaternion.Euler(-90, 0, 0);
     }
 
     //Scales the background to its initial size (only the Header shown)
@@ -94,7 +99,7 @@ public class PopupController : MonoBehaviour
         Background.localScale = new Vector3(width, 1, height);
         minBackgroundScale = Background.localScale;
 
-        Background.position = Heading.position;
+        Background.position = new Vector3(Heading.position.x, Heading.position.y, Background.position.z);
     }
 
     //Expands the background and displays the content text
@@ -113,6 +118,7 @@ public class PopupController : MonoBehaviour
         //Repositions scaled box so that it looks like the background expands downwards
         Vector3 initialPosition = Heading.position;
         initialPosition.y -= height * 0.5f;
+        initialPosition.z = Background.position.z;
 
         Background.position = Vector3.Slerp(Background.position, initialPosition, BackgroundExpansionSpeed * Time.deltaTime);
     }
