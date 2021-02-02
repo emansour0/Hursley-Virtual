@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class ButtonController : MonoBehaviour
@@ -9,6 +10,9 @@ public class ButtonController : MonoBehaviour
     GameObject popup;
     public float PopupTime = 0.1f;
     public GameObject ButtonPopup;
+
+    public bool OpensLink;
+    public string InteractableLink;
 
     Coroutine PopupTimeout;
 
@@ -35,10 +39,17 @@ public class ButtonController : MonoBehaviour
         PopupTimeout = StartCoroutine(DestroyPopup());
     }
 
-    public void OnClick()
+    public IEnumerator OnClick()
     {
+#if !UNITY_EDITOR
+        if (OpensLink)
+        {
+            yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
+            openWindow(InteractableLink);
+        }
+#endif
         anim.SetTrigger("button_pressed");
-
+        yield break;
     }
 
     IEnumerator DestroyPopup()
@@ -48,12 +59,15 @@ public class ButtonController : MonoBehaviour
 
         for (int i = 255; i > 0; i--)
         {
-            heading.color = new Color32((byte) (255 * heading.color.r), (byte) (255 * heading.color.g), (byte) (255 * heading.color.b), (byte) i);
-            content.color = new Color32((byte) (255 * content.color.r), (byte) (255 * content.color.g), (byte) (255 * content.color.b), (byte) i);
+            heading.color = new Color32((byte)(255 * heading.color.r), (byte)(255 * heading.color.g), (byte)(255 * heading.color.b), (byte)i);
+            content.color = new Color32((byte)(255 * content.color.r), (byte)(255 * content.color.g), (byte)(255 * content.color.b), (byte)i);
 
             yield return new WaitForSeconds(PopupTime);
         }
 
         Destroy(popup);
     }
+
+    [DllImport("__Internal")]
+    private static extern void openWindow(string url);
 }
