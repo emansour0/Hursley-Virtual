@@ -6,16 +6,13 @@ public class PopupController : MonoBehaviour
 {
     public int PlayerLayer = 8; //Unity layer that the player is placed in
 
-    public int VisibilityRadius = 5;
-    public int ContentRadius = 2;
+    private float PlayerHeightOffset = 0.5f; //Offset along y axis so that pop ups angle slightly upwards towards the player head
+    private float HorizontalMargin = 0.2f;
+    private float VerticalMargin = 0.1f;
+    private float SpacingBetweenHeadingAndContent = 0.1f;
 
-    public float PlayerHeightOffset = 0.5f; //Offset along y axis so that pop ups angle slightly upwards towards the player head
-    public float HorizontalMargin = 0.2f;
-    public float VerticalMargin = 0.1f;
-    public float SpacingBetweenHeadingAndContent = 0.1f;
-
-    public int RotationSpeed = 3;
-    public int BackgroundExpansionSpeed = 2;
+    private int RotationSpeed = 3;
+    private int BackgroundExpansionSpeed = 2;
 
     public Transform Background;
     public Transform Heading;
@@ -30,8 +27,11 @@ public class PopupController : MonoBehaviour
     //The size of the background when the player is at a distance and it only fits the heading
     private Vector3 minBackgroundScale;
 
+    public int FollowPlayerRadius = 5;
+    public int ShowContentRadius = 2;
+
     //Controls whether a user can click on this pop up to make it show a link
-    public bool IsInteractable = false; //Can they?
+    public bool OpensLink = false; //Can they?
     public string InteractableLink; //Link to show
 
     // Start is called before the first frame update
@@ -54,8 +54,8 @@ public class PopupController : MonoBehaviour
     {
         int layerMask = 1 << PlayerLayer;
 
-        Collider[] visibiltySphere = Physics.OverlapSphere(transform.position, VisibilityRadius, layerMask);
-        Collider[] contentSphere = Physics.OverlapSphere(transform.position, ContentRadius, layerMask);
+        Collider[] visibiltySphere = Physics.OverlapSphere(transform.position, FollowPlayerRadius, layerMask);
+        Collider[] contentSphere = Physics.OverlapSphere(transform.position, ShowContentRadius, layerMask);
 
 
         if (visibiltySphere.Length > 0) rotateToPlayer(visibiltySphere[0].transform);
@@ -72,22 +72,20 @@ public class PopupController : MonoBehaviour
         }
     }
 
+    public void OnClick()
+    {
+#if !UNITY_EDITOR
+        if (OpensLink)
+        {
+            Utils.OpenWindow(InteractableLink);
+        }
+#endif
+    }
+
     //Rotates the text to face the direction of the player
     public void rotateToPlayer(Transform player)
     {
-        transform.rotation = Quaternion.Slerp(transform.rotation, findRotationToPlayer(player), RotationSpeed * Time.deltaTime);
-    }
-
-    public Quaternion findRotationToPlayer(Transform player)
-    {
-        Vector3 targetPosition = transform.position;
-        targetPosition.y -= PlayerHeightOffset;
-
-        Vector3 relativePos = targetPosition - player.position;
-
-        //Multiplying Quaternions is equivalent to combining them
-        //Here, an extra -90 degree rotation is applied on the X, so that the plane faces forward
-        return Quaternion.LookRotation(relativePos) * Quaternion.Euler(-90, 0, 0);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Utils.FindRotationToPlayer(transform, player, PlayerHeightOffset), RotationSpeed * Time.deltaTime);
     }
 
     //Scales the background to its initial size (only the Header shown)

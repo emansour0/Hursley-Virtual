@@ -28,7 +28,7 @@ public class ButtonController : MonoBehaviour
         {
             //Create the popup and rotate it to face the player
             popup = Instantiate(ButtonPopup, popupPosition.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-            Quaternion rotationToPlayer = popup.GetComponent<PopupController>().findRotationToPlayer(player);
+            Quaternion rotationToPlayer =Utils.FindRotationToObject(transform, player);
             popup.transform.rotation = rotationToPlayer;
         }
         else
@@ -45,7 +45,7 @@ public class ButtonController : MonoBehaviour
         if (OpensLink)
         {
             yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
-            openWindow(InteractableLink);
+            Utils.OpenWindow(InteractableLink);
         }
 #endif
         anim.SetTrigger("button_pressed");
@@ -67,7 +67,4 @@ public class ButtonController : MonoBehaviour
 
         Destroy(popup);
     }
-
-    [DllImport("__Internal")]
-    private static extern void openWindow(string url);
 }
