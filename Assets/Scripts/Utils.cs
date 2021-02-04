@@ -29,5 +29,5 @@ public static class Utils
     }
 
     [DllImport("__Internal")]
-    public static extern void OpenWindow(string url);
+    public static extern void openWindow(string url);
 }

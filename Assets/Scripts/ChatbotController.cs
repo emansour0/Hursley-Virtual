@@ -11,8 +11,6 @@ public class ChatbotController : MonoBehaviour
     public string ApiKey;
     public string Version;
 
-    private bool activated;
-
     private Session SessionID = null;
     public enum MessageType { Incoming, Outgoing };
     private List<(string, MessageType)> MessageLog;
@@ -28,11 +26,13 @@ public class ChatbotController : MonoBehaviour
         ApiManager.WatsonSessionEvent.AddListener(OnSessionChange);
         ApiManager.WatsonMessageEvent.AddListener(OnMessageReceived);
         ChatbotView.UserEnteredMessageEvent.AddListener(UserSentChatMessage);
+
+        StartCoroutine(ApiManager.CreateSession(Url, ApiKey, Version, AssistantId));
     }
 
     public void OpenChatbot()
     {
-        StartCoroutine(ApiManager.CreateSession(Url, ApiKey, Version, AssistantId));
+        if(SessionID == null) StartCoroutine(ApiManager.CreateSession(Url, ApiKey, Version, AssistantId));
         OpenChatbotEvent.Invoke(MessageLog, ChatbotName);
     }
 
@@ -56,8 +56,11 @@ public class ChatbotController : MonoBehaviour
 
     private IEnumerator SendApiMessage(string message)
     {
-        //If a session doesn't exist, we need to create one and then wait (in the while loop) for watson to send back the session ID
-        if (SessionID is null) yield return null;
+        //If the session didn't exist already (failsafe, there should always be one created when Start() is called)
+        if (SessionID == null) StartCoroutine(ApiManager.CreateSession(Url, ApiKey, Version, AssistantId));
+
+        //While the session ID is being processed, wait here until it exists
+        if (SessionID == null) yield return null;
 
         StartCoroutine(ApiManager.SendMessage(Url, ApiKey, Version, SessionID, AssistantId, message));
     }

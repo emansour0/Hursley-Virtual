@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class PopupController : MonoBehaviour
@@ -77,7 +78,7 @@ public class PopupController : MonoBehaviour
 #if !UNITY_EDITOR
         if (OpensLink)
         {
-            Utils.OpenWindow(InteractableLink);
+            Utils.openWindow(InteractableLink);
         }
 #endif
     }

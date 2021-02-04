@@ -16,7 +16,6 @@ public class ButtonController : MonoBehaviour
 
     Coroutine PopupTimeout;
 
-    // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -45,7 +44,7 @@ public class ButtonController : MonoBehaviour
         if (OpensLink)
         {
             yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
-            Utils.OpenWindow(InteractableLink);
+            Utils.openWindow(InteractableLink);
         }
 #endif
         anim.SetTrigger("button_pressed");
