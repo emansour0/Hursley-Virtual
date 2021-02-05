@@ -91,11 +91,11 @@ public static class ApiManager
 
             if (webRequest.result == UnityWebRequest.Result.ProtocolError || webRequest.result == UnityWebRequest.Result.ConnectionError)
             {
-                WatsonMessageEvent.Invoke(new ApiResponseMessage(false, sessionId));
+                WatsonMessageEvent.Invoke(new ApiResponseMessage(false, sessionId, message));
                 yield break;
             }
             Message responseMessage = JsonUtility.FromJson<Message>(webRequest.downloadHandler.text);
-            WatsonMessageEvent.Invoke(new ApiResponseMessage(true, responseMessage, sessionId));
+            WatsonMessageEvent.Invoke(new ApiResponseMessage(true, responseMessage, sessionId, message));
         }
     }
 }
@@ -128,20 +128,23 @@ public class ApiSessionMessage : ApiMessage
 
 public class ApiResponseMessage : ApiMessage
 {
+    public string Message { get; private set; }
     public Message Payload { get; private set; }
     public Session SessionId;
 
-    public ApiResponseMessage(bool successful, Message payload, Session sessionId)
+    public ApiResponseMessage(bool successful, Message payload, Session sessionId, string originalMessage)
     {
         Payload = payload;
         Successful = successful;
         SessionId = sessionId;
+        Message = originalMessage;
     }
 
-    public ApiResponseMessage(bool successful, Session sessionId)
+    public ApiResponseMessage(bool successful, Session sessionId, string originalMessage)
     {
         Successful = successful;
         SessionId = sessionId;
+        Message = originalMessage;
     }
 }
 

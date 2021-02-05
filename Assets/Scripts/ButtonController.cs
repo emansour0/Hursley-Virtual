@@ -14,11 +14,16 @@ public class ButtonController : MonoBehaviour
     public bool OpensLink;
     public string InteractableLink;
 
-    Coroutine PopupTimeout;
+    public string PopupHeading;
+    public string PopupContent;
+
+    private Coroutine PopupTimeout;
 
     void Start()
     {
         anim = GetComponent<Animator>();
+        ButtonPopup.transform.GetChild(0).GetComponent<TextMesh>().text = PopupHeading;
+        ButtonPopup.transform.GetChild(1).GetComponent<TextMesh>().text = PopupContent;
     }
 
     public void OnHover(Transform player)
@@ -40,14 +45,14 @@ public class ButtonController : MonoBehaviour
 
     public IEnumerator OnClick()
     {
+        anim.SetTrigger("button_pressed");
 #if !UNITY_EDITOR
         if (OpensLink)
         {
-            yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
+            yield return new WaitForSecondsRealtime(anim.GetCurrentAnimatorStateInfo(0).length);
             Utils.openWindow(InteractableLink);
         }
 #endif
-        anim.SetTrigger("button_pressed");
         yield break;
     }
 

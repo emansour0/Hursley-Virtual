@@ -56,11 +56,11 @@ public class ChatbotController : MonoBehaviour
 
     private IEnumerator SendApiMessage(string message)
     {
-        //If the session didn't exist already (failsafe, there should always be one created when Start() is called)
+        //If the session didn't exist already 
         if (SessionID == null) StartCoroutine(ApiManager.CreateSession(Url, ApiKey, Version, AssistantId));
 
         //While the session ID is being processed, wait here until it exists
-        if (SessionID == null) yield return null;
+        while (SessionID == null) yield return null;
 
         StartCoroutine(ApiManager.SendMessage(Url, ApiKey, Version, SessionID, AssistantId, message));
     }
@@ -90,6 +90,9 @@ public class ChatbotController : MonoBehaviour
 
     private void OnMessageReceived(ApiResponseMessage response)
     {
+        //If the message session ID doesn't match the session ID currently on this chatbot, then ignore it, because it is for another session
+        if (response.SessionId != SessionID) return;
+
         if (response.Successful)
         {
             string text;
@@ -105,7 +108,10 @@ public class ChatbotController : MonoBehaviour
         }
         else
         {
-            Debug.LogError($"Chatbot {ChatbotName} was not able to recieve a response to message to Watson with session {response.SessionId.session_id}");
+            Debug.LogError($"Chatbot {ChatbotName} was not able to recieve a response to message to Watson with session {response.SessionId.session_id}, creating new session and resending");
+            
+            SessionID = null; //Reset session
+            StartCoroutine(SendApiMessage(response.Message)); //This coroutine handles sending and recreation of session if it doesn't exist (which we made sure of by setting it to null)
         }
     }
 }

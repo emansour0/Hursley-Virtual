@@ -47,6 +47,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -71,6 +72,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!102 &953614857741681399
 TextMesh:
   serializedVersion: 3
@@ -79,7 +81,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953614857741681385}
-  m_Text: Click me!
+  m_Text: Click to learn more about Hursley House
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -92,7 +94,7 @@ TextMesh:
   m_Font: {fileID: 12800000, guid: 5ab9f72534474074a87ee92a2d5950f2, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4294967295
 --- !u!1 &953614857790005936
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,6 +142,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -164,6 +167,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!102 &953614857790005950
 TextMesh:
   serializedVersion: 3
@@ -172,7 +176,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953614857790005936}
-  m_Text: You've found a button!
+  m_Text: Building Information
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -233,20 +237,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerLayer: 8
-  VisibilityRadius: 5
-  ContentRadius: 2
-  PlayerHeightOffset: 0.5
-  HorizontalMargin: 0.2
-  VerticalMargin: 0.1
-  SpacingBetweenHeadingAndContent: 0.1
-  RotationSpeed: 3
-  BackgroundExpansionSpeed: 2
   Background: {fileID: 953614859181566648}
   Heading: {fileID: 953614857790005951}
   Content: {fileID: 953614857741681385}
   HeadingText: {fileID: 953614857790005950}
   ContentText: {fileID: 953614857741681399}
-  IsInteractable: 0
+  FollowPlayerRadius: 5
+  ShowContentRadius: 2
+  OpensLink: 0
   InteractableLink: 
 --- !u!1 &953614859181566649
 GameObject:
@@ -304,6 +302,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -328,6 +327,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &953614859181566663
 BoxCollider:
   m_ObjectHideFlags: 0
