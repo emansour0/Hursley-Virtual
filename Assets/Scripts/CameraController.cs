@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,9 +11,34 @@ public class CameraController : MonoBehaviour
     private float yRotation = 0;
     private float yTargetRotation = 0;
 
+    private float tempMouseSensitivity;
+    private float tempSmoothingSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
+        tempMouseSensitivity = MouseSensitivity;
+        tempSmoothingSpeed = SmoothingSpeed;
+
+        Cursor.lockState = CursorLockMode.Locked;
+
+        ChatbotController.OpenChatbotEvent.AddListener(FreezeMovement);
+        ChatbotController.CloseChatbotEvent.AddListener(UnFreezeMovement);
+    }
+
+    private void FreezeMovement(List<(string, ChatbotController.MessageType)> arg0, string arg1)
+    {
+        MouseSensitivity = 0;
+        SmoothingSpeed = 50;
+
+        Cursor.lockState = CursorLockMode.Confined;
+    }
+
+    public void UnFreezeMovement()
+    {
+        MouseSensitivity = tempMouseSensitivity;
+        SmoothingSpeed = tempSmoothingSpeed;
+
         Cursor.lockState = CursorLockMode.Locked;
     }
 

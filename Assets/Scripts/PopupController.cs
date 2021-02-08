@@ -1,18 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class PopupController : MonoBehaviour
 {
     public int PlayerLayer = 8; //Unity layer that the player is placed in
 
-    public int VisibilityRadius = 5;
-    public int ContentRadius = 2;
+    private float PlayerHeightOffset = 0.5f; //Offset along y axis so that pop ups angle slightly upwards towards the player head
+    private float HorizontalMargin = 0.2f;
+    private float VerticalMargin = 0.1f;
+    private float SpacingBetweenHeadingAndContent = 0.1f;
 
-    public float PlayerHeightOffset = 0.5f; //Offset along y axis so that pop ups angle slightly upwards towards the player head
-
-    public int RotationSpeed = 3;
-    public int BackgroundExpansionSpeed = 2;
+    private int RotationSpeed = 3;
+    private int BackgroundExpansionSpeed = 2;
 
     public Transform Background;
     public Transform Heading;
@@ -21,31 +22,31 @@ public class PopupController : MonoBehaviour
     public TextMesh HeadingText;
     public TextMesh ContentText;
 
-    //The number of characters which are displayable in a width of 1 unit
-    public int CharactersPerWidth = 16;
-
-    //Heights of a line of text in Unity units, used for scaling
-    public float HeadingLineHeight = 0.1f;
-    public float ContentLineHeight = 0.1f;
-
-    //Margin between the heading and content
-    public float SpacingBeforeContent = 0.1f;
-    public float SpacingAroundHeader = 0.1f;
+    private Vector3 headingSize;
+    private Vector3 contentSize;
 
     //The size of the background when the player is at a distance and it only fits the heading
     private Vector3 minBackgroundScale;
 
+    public int FollowPlayerRadius = 5;
+    public int ShowContentRadius = 2;
+
     //Controls whether a user can click on this pop up to make it show a link
-    public bool IsInteractable = false; //Can they?
+    public bool OpensLink = false; //Can they?
     public string InteractableLink; //Link to show
 
     // Start is called before the first frame update
     void Start()
     {
+        //Gets the size in Unity dimensions of both 
+        headingSize = HeadingText.GetComponent<MeshRenderer>().bounds.size;
+        contentSize = ContentText.GetComponent<MeshRenderer>().bounds.size;
+
         scaleInitialBackground();
 
+        //Place the content text in line with the heading but move it down so that the content fits below it
         Vector3 contentPos = Content.transform.position;
-        contentPos.y = Heading.position.y - (SpacingBeforeContent + HeadingLineHeight * getNumberOfLines(HeadingText));
+        contentPos.y = Heading.position.y - (contentSize.y * 0.5f + headingSize.y * 0.5f + SpacingBetweenHeadingAndContent);
         Content.transform.position = contentPos;
     }
 
@@ -54,8 +55,8 @@ public class PopupController : MonoBehaviour
     {
         int layerMask = 1 << PlayerLayer;
 
-        Collider[] visibiltySphere = Physics.OverlapSphere(transform.position, VisibilityRadius, layerMask);
-        Collider[] contentSphere = Physics.OverlapSphere(transform.position, ContentRadius, layerMask);
+        Collider[] visibiltySphere = Physics.OverlapSphere(transform.position, FollowPlayerRadius, layerMask);
+        Collider[] contentSphere = Physics.OverlapSphere(transform.position, ShowContentRadius, layerMask);
 
 
         if (visibiltySphere.Length > 0) rotateToPlayer(visibiltySphere[0].transform);
@@ -65,36 +66,40 @@ public class PopupController : MonoBehaviour
         else
         {
             Background.localScale = Vector3.Slerp(Background.localScale, minBackgroundScale, BackgroundExpansionSpeed * Time.deltaTime);
-            Background.position = Vector3.Slerp(Background.position, Heading.position, BackgroundExpansionSpeed * Time.deltaTime);
+            Vector3 originalPosition = Heading.position;
+            originalPosition.z = Background.position.z;
+            Background.position = Vector3.Slerp(Background.position, originalPosition, BackgroundExpansionSpeed * Time.deltaTime);
             Content.SetActive(false);
         }
     }
 
-    //Rotates the text to face the direction of the player
-    private void rotateToPlayer(Transform player)
+    public void OnClick()
     {
-            Vector3 targetPosition = transform.position;
-            targetPosition.y -= PlayerHeightOffset;
+#if !UNITY_EDITOR
+        if (OpensLink)
+        {
+            Utils.openWindow(InteractableLink);
+        }
+#endif
+    }
 
-            Vector3 relativePos = targetPosition - player.position;
-
-            //Multiplying Quaternions is equivalent to combining them
-            //Here, an extra -90 degree rotation is applied on the X, so that the plane faces forward
-            Quaternion rotationToPlayer = Quaternion.LookRotation(relativePos) * Quaternion.Euler(-90, 0, 0);
-
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotationToPlayer, RotationSpeed * Time.deltaTime);
+    //Rotates the text to face the direction of the player
+    public void rotateToPlayer(Transform player)
+    {
+        transform.rotation = Quaternion.Slerp(transform.rotation, Utils.FindRotationToPlayer(transform, player, PlayerHeightOffset), RotationSpeed * Time.deltaTime);
     }
 
     //Scales the background to its initial size (only the Header shown)
     private void scaleInitialBackground()
     {
-        float width = (float) HeadingText.text.Length / (float) CharactersPerWidth;
-        float height = SpacingAroundHeader + getNumberOfLines(HeadingText) * (float) HeadingLineHeight;
+        float width = contentSize.x < headingSize.x ? headingSize.x + HorizontalMargin : contentSize.x + HorizontalMargin;
+        float height = headingSize.y + VerticalMargin * 0.5f;
 
+        //Height is in the z axis because the plane is rotated, so z is the height and x is the width
         Background.localScale = new Vector3(width, 1, height);
         minBackgroundScale = Background.localScale;
 
-        Background.position = Heading.position;
+        Background.position = new Vector3(Heading.position.x, Heading.position.y, Background.position.z);
     }
 
     //Expands the background and displays the content text
@@ -103,7 +108,7 @@ public class PopupController : MonoBehaviour
         Content.SetActive(true); //Display content text
 
         //Increase background height by ContentLineHeight for every line of text
-        float height = (float) getNumberOfLines(ContentText) * (float) ContentLineHeight;
+        float height = contentSize.y + SpacingBetweenHeadingAndContent + VerticalMargin * 0.5f;
 
         Vector3 targetSize = minBackgroundScale;
         targetSize.z += height;
@@ -113,6 +118,7 @@ public class PopupController : MonoBehaviour
         //Repositions scaled box so that it looks like the background expands downwards
         Vector3 initialPosition = Heading.position;
         initialPosition.y -= height * 0.5f;
+        initialPosition.z = Background.position.z;
 
         Background.position = Vector3.Slerp(Background.position, initialPosition, BackgroundExpansionSpeed * Time.deltaTime);
     }

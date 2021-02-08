@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &953614857741681385
+--- !u!1 &8402292896192776928
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 953614857741681384}
-  - component: {fileID: 953614857741681398}
-  - component: {fileID: 953614857741681399}
+  - component: {fileID: 8402292896192776931}
+  - component: {fileID: 8402292896192776930}
+  - component: {fileID: 8402292896192776929}
   m_Layer: 9
   m_Name: Content
   m_TagString: Pop Up
@@ -18,27 +18,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &953614857741681384
+--- !u!4 &8402292896192776931
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 953614857741681385}
+  m_GameObject: {fileID: 8402292896192776928}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -0.21}
+  m_LocalPosition: {x: 0, y: 0.38, z: -0.21}
   m_LocalScale: {x: 0.099999994, y: 0.09999987, z: 0.09999987}
   m_Children: []
-  m_Father: {fileID: 953614858942737477}
-  m_RootOrder: 2
+  m_Father: {fileID: 8402292896348941519}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &953614857741681398
+--- !u!23 &8402292896192776930
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 953614857741681385}
+  m_GameObject: {fileID: 8402292896192776928}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -47,10 +47,11 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: e4fd20b96d6e6cf419c3ab9bdd92928f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -71,14 +72,15 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!102 &953614857741681399
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!102 &8402292896192776929
 TextMesh:
   serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 953614857741681385}
+  m_GameObject: {fileID: 8402292896192776928}
   m_Text: 'This is a virtual recreation of Hursley
 
     House, which holds the IBM
@@ -97,11 +99,11 @@ TextMesh:
   m_FontSize: 60
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: 5ab9f72534474074a87ee92a2d5950f2, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4294967295
---- !u!1 &953614857790005936
+    rgba: 4278190080
+--- !u!1 &8402292896348941517
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,9 +111,65 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 953614857790005951}
-  - component: {fileID: 953614857790005949}
-  - component: {fileID: 953614857790005950}
+  - component: {fileID: 8402292896348941519}
+  - component: {fileID: 8402292896348941518}
+  m_Layer: 9
+  m_Name: Popup Text
+  m_TagString: Pop Up
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8402292896348941519
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8402292896348941517}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: -0.7071068, w: 0}
+  m_LocalPosition: {x: 0.09, y: 1.46, z: 20.41}
+  m_LocalScale: {x: 0.1, y: 0.1000001, z: 0.1000001}
+  m_Children:
+  - {fileID: 8402292896399019994}
+  - {fileID: 8402292896192776931}
+  - {fileID: 8402292896799339082}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 270, y: 0, z: 180}
+--- !u!114 &8402292896348941518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8402292896348941517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ed1dceaf39e2a54c8db645faef12b07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerLayer: 8
+  Background: {fileID: 8402292896799339082}
+  Heading: {fileID: 8402292896399019994}
+  Content: {fileID: 8402292896192776928}
+  HeadingText: {fileID: 8402292896399019992}
+  ContentText: {fileID: 8402292896192776929}
+  FollowPlayerRadius: 5
+  ShowContentRadius: 2
+  OpensLink: 0
+  InteractableLink: https://visithursley.eu-gb.mybluemix.net/
+--- !u!1 &8402292896399019999
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8402292896399019994}
+  - component: {fileID: 8402292896399019993}
+  - component: {fileID: 8402292896399019992}
   m_Layer: 9
   m_Name: Heading
   m_TagString: Pop Up
@@ -119,27 +177,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &953614857790005951
+--- !u!4 &8402292896399019994
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 953614857790005936}
+  m_GameObject: {fileID: 8402292896399019999}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 4.029999}
+  m_LocalPosition: {x: 0, y: 0.38, z: 4.03}
   m_LocalScale: {x: 0.099999994, y: 0.09999987, z: 0.09999987}
   m_Children: []
-  m_Father: {fileID: 953614858942737477}
-  m_RootOrder: 1
+  m_Father: {fileID: 8402292896348941519}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &953614857790005949
+--- !u!23 &8402292896399019993
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 953614857790005936}
+  m_GameObject: {fileID: 8402292896399019999}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -148,10 +206,11 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: e4fd20b96d6e6cf419c3ab9bdd92928f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -172,14 +231,15 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!102 &953614857790005950
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!102 &8402292896399019992
 TextMesh:
   serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 953614857790005936}
+  m_GameObject: {fileID: 8402292896399019999}
   m_Text: Welcome to IBM Hursley!
   m_OffsetZ: 0
   m_CharacterSize: 1
@@ -187,14 +247,14 @@ TextMesh:
   m_Anchor: 4
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 100
-  m_FontStyle: 0
+  m_FontSize: 120
+  m_FontStyle: 1
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: 5ab9f72534474074a87ee92a2d5950f2, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4294967295
---- !u!1 &953614858942737479
+    rgba: 4294913280
+--- !u!1 &8402292896799339081
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -202,72 +262,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 953614858942737477}
-  - component: {fileID: 953614858942737478}
-  m_Layer: 9
-  m_Name: Popup Text
-  m_TagString: Pop Up
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &953614858942737477
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 953614858942737479}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 4.19, y: -0.03, z: -10.76}
-  m_LocalScale: {x: 0.1, y: 0.1000001, z: 0.1000001}
-  m_Children:
-  - {fileID: 953614859181566648}
-  - {fileID: 953614857790005951}
-  - {fileID: 953614857741681384}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &953614858942737478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 953614858942737479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ed1dceaf39e2a54c8db645faef12b07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerLayer: 8
-  VisibilityRadius: 5
-  ContentRadius: 2
-  PlayerHeightOffset: 0.5
-  RotationSpeed: 3
-  BackgroundExpansionSpeed: 2
-  Background: {fileID: 953614859181566648}
-  Heading: {fileID: 953614857790005951}
-  Content: {fileID: 953614857741681385}
-  HeadingText: {fileID: 953614857790005950}
-  ContentText: {fileID: 953614857741681399}
-  CharactersPerWidth: 16
-  HeadingLineHeight: 0.2
-  ContentLineHeight: 0.1
-  SpacingBeforeContent: 0.1
-  SpacingAroundHeader: 0.1
---- !u!1 &953614859181566649
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 953614859181566648}
-  - component: {fileID: 953614859181566661}
-  - component: {fileID: 953614859181566662}
-  - component: {fileID: 953614859181566663}
+  - component: {fileID: 8402292896799339082}
+  - component: {fileID: 8402292896799339077}
+  - component: {fileID: 8402292896799339076}
+  - component: {fileID: 8402292896799339083}
   m_Layer: 9
   m_Name: Background
   m_TagString: Pop Up
@@ -275,35 +273,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &953614859181566648
+--- !u!4 &8402292896799339082
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 953614859181566649}
+  m_GameObject: {fileID: 8402292896799339081}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 953614858942737477}
-  m_RootOrder: 0
+  m_Father: {fileID: 8402292896348941519}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!33 &953614859181566661
+--- !u!33 &8402292896799339077
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 953614859181566649}
+  m_GameObject: {fileID: 8402292896799339081}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &953614859181566662
+--- !u!23 &8402292896799339076
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 953614859181566649}
+  m_GameObject: {fileID: 8402292896799339081}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -312,6 +310,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -336,15 +335,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &953614859181566663
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8402292896799339083
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 953614859181566649}
+  m_GameObject: {fileID: 8402292896799339081}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10, y: 1, z: 10.000002}

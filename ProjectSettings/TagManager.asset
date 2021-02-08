@@ -15,9 +15,9 @@ TagManager:
   - 
   - 
   - Player
-  - Interactables
-  - 
-  - 
+  - Popups
+  - Buttons
+  - Chatbot
   - 
   - 
   - 
@@ -41,4 +41,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 716441903
+    locked: 0
+  - name: Text
+    uniqueID: 415039863
     locked: 0
