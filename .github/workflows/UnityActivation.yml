@@ -1,6 +1,6 @@
 # This workflow activates a Unity license
 
-name: CI
+name: Create Unity License File
 
 # Controls when the action will run. 
 on:
