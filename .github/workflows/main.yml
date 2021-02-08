@@ -42,6 +42,7 @@ jobs:
       - name: Build project
         uses: game-ci/unity-builder@v2.0-alpha-6
         with:
+          customImage: addybongo/ibm-hursley:unity-2020.2.1 #Current Unity Builder isn't updated to 2020.2, so this docker image works in the meantime
           unityVersion: 2020.2.1f1
           targetPlatform: WebGL
           
