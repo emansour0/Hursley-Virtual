@@ -53,6 +53,7 @@ jobs:
           path: build
         
   Deploy:
+    needs: [Build] #Stops this executing before building the project
     name: Dockerise and Deploy to IBM
     runs-on: ubuntu-latest
     env:
