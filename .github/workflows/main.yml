@@ -8,10 +8,10 @@ env:
 # Controls when the action will run. 
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  #push:
+  #  branches: [ main ]
+  #pull_request:
+  #  branches: [ main ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -56,6 +56,7 @@ jobs:
       GITHUB_SHA: ${{ github.sha }}
       IBM_CLOUD_API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
       IBM_CLOUD_REGION: eu-gb
+      IBM_CONTAINER_REGISTRY_REGION: uk-south
       ICR_NAMESPACE: ${{ secrets.ICR_NAMESPACE }}
       REGISTRY_HOSTNAME: uk.icr.io
       IMAGE_NAME: unity-webgl
@@ -86,7 +87,7 @@ jobs:
       - name: Authenticate with IBM Cloud CLI
         run: |
           ibmcloud login --apikey "${IBM_CLOUD_API_KEY}" -r "${IBM_CLOUD_REGION}" -g default
-          ibmcloud cr region-set "${IBM_CLOUD_REGION}"
+          ibmcloud cr region-set "${IBM_CONTAINER_REGISTRY_REGION}"
           ibmcloud cr login
 
       # Build the Docker image
