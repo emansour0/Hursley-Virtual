@@ -55,9 +55,9 @@ jobs:
     env:
       GITHUB_SHA: ${{ github.sha }}
       IBM_CLOUD_API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
-      IBM_CLOUD_REGION: eu-de #Currently set for Paris server, needs EU-DE region
+      IBM_CLOUD_REGION: uk-south
       ICR_NAMESPACE: ${{ secrets.ICR_NAMESPACE }}
-      REGISTRY_HOSTNAME: us.icr.io
+      REGISTRY_HOSTNAME: uk.icr.io
       IMAGE_NAME: unity-webgl
       IKS_CLUSTER: c0hbkprf0da7daphsn9g
       DEPLOYMENT_NAME: IBM-Hursley-Unity
