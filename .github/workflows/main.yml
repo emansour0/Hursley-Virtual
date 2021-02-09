@@ -34,10 +34,6 @@ jobs:
         with:
           key: Library
           path: Library
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
       
       - name: Build project
         uses: game-ci/unity-builder@v2.0-alpha-6
@@ -62,7 +58,7 @@ jobs:
       IBM_CLOUD_REGION: us-south
       ICR_NAMESPACE: ${{ secrets.ICR_NAMESPACE }}
       REGISTRY_HOSTNAME: us.icr.io
-      IMAGE_NAME: Unity-WebGL
+      IMAGE_NAME: unity-webgl
       IKS_CLUSTER: c0hbkprf0da7daphsn9g
       DEPLOYMENT_NAME: IBM-Hursley-Unity
       PORT: 5001
