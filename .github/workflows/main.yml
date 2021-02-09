@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Build and Deploy
 
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
@@ -19,7 +19,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  Build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -52,3 +52,66 @@ jobs:
           name: Build
           path: build
         
+  Deploy:
+    name: Dockerise and Deploy to IBM
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_SHA: ${{ github.sha }}
+      IBM_CLOUD_API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
+      IBM_CLOUD_REGION: us-south
+      ICR_NAMESPACE: ${{ secrets.ICR_NAMESPACE }}
+      REGISTRY_HOSTNAME: us.icr.io
+      IMAGE_NAME: Unity-WebGL
+      IKS_CLUSTER: c0hbkprf0da7daphsn9g
+      DEPLOYMENT_NAME: IBM-Hursley-Unity
+      PORT: 5001
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+        #Gets the build file from the previous job in artifacts, as GitHub doesn't share between jobs
+      - name: Get build file from previous job
+        uses: actions/download-artifact@v2
+        with:
+          name: Build
+        
+      # Download and Install IBM Cloud CLI
+      - name: Install IBM Cloud CLI
+        run: |
+          curl -fsSL https://clis.cloud.ibm.com/install/linux | sh
+          ibmcloud --version
+          ibmcloud config --check-version=false
+          ibmcloud plugin install -f kubernetes-service
+          ibmcloud plugin install -f container-registry
+
+      # Authenticate with IBM Cloud CLI
+      - name: Authenticate with IBM Cloud CLI
+        run: |
+          ibmcloud login --apikey "${IBM_CLOUD_API_KEY}" -r "${IBM_CLOUD_REGION}" -g default
+          ibmcloud cr region-set "${IBM_CLOUD_REGION}"
+          ibmcloud cr login
+
+      # Build the Docker image
+      - name: Build with Docker
+        run: |
+          docker build -t "$REGISTRY_HOSTNAME"/"$ICR_NAMESPACE"/"$IMAGE_NAME":"$GITHUB_SHA" \
+            --build-arg GITHUB_SHA="$GITHUB_SHA" \
+            --build-arg GITHUB_REF="$GITHUB_REF" .
+
+      # Push the image to IBM Container Registry
+      - name: Push the image to ICR
+        run: |
+          docker push $REGISTRY_HOSTNAME/$ICR_NAMESPACE/$IMAGE_NAME:$GITHUB_SHA
+
+      # Deploy the Docker image to the IKS cluster
+      - name: Deploy to IKS
+        run: |
+          ibmcloud ks cluster config --cluster $IKS_CLUSTER
+          kubectl config current-context
+          kubectl create deployment $DEPLOYMENT_NAME --image=$REGISTRY_HOSTNAME/$ICR_NAMESPACE/$IMAGE_NAME:$GITHUB_SHA --dry-run -o yaml > deployment.yaml
+          kubectl apply -f deployment.yaml
+          kubectl rollout status deployment/$DEPLOYMENT_NAME
+          kubectl create service loadbalancer $DEPLOYMENT_NAME --tcp=80:$PORT --dry-run -o yaml > service.yaml
+          kubectl apply -f service.yaml
+          kubectl get services -o wide
