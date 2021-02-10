@@ -62,7 +62,7 @@ jobs:
       IMAGE_NAME: unity-webgl
       IKS_CLUSTER: c0hbkprf0da7daphsn9g
       DEPLOYMENT_NAME: ibm-hursley-unity
-      PORT: 5001
+      PORT: 8080
     
     steps:
       - name: Checkout
