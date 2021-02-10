@@ -61,7 +61,7 @@ jobs:
       REGISTRY_HOSTNAME: uk.icr.io
       IMAGE_NAME: unity-webgl
       IKS_CLUSTER: c0hbkprf0da7daphsn9g
-      DEPLOYMENT_NAME: IBM-Hursley-Unity
+      DEPLOYMENT_NAME: ibm-hursley-unity
       PORT: 5001
     
     steps:
