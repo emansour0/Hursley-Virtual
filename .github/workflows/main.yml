@@ -69,13 +69,13 @@ jobs:
           name: Build
           
       - name:  Authorize AWS CLI to IBM Bucket
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: ItsKarma/aws-cli@v1.70.0
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: eu-gb-smart
         with:
-          aws-access-key-id: ${{ secrets.S3_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.S3_SECRET_ACCESS_KEY }}
-          aws-region: eu-gb-smart
+          args: aws --endpoint-url https://s3.eu-gb.cloud-object-storage.appdomain.cloud s3 cp --recursive WebGL/WebGL/ s3://ibm-hursley/
           
-      - name: Deploy Build to Bucket
-        run: |
-          aws --endpoint-url https://s3.eu-gb.cloud-object-storage.appdomain.cloud s3 cp --recursive WebGL/WebGL/ s3://ibm-hursley/
+
         
