@@ -1,15 +1,15 @@
-# This workflow activates a Unity license
+# This workflow creates a Unity license request file, which needs to be activated at 
+# https://license.unity3d.com/manual
+#
+# Once the license is activated via that link a file will be returned. Copy and paste the 
+# contents of that file to secrets.UNITY_LICENSE
+#
+# Once Stef has given me the IBM license, this shouldn't be needed anymore as it activates personal licenses
 
-name: Create Unity License File
+name: Create Unity License Activation File
 
 # Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
