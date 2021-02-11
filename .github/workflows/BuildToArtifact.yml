@@ -1,6 +1,4 @@
-# This is a basic workflow to help you get started with Actions
-
-name: Build and Deploy
+name: Build
 
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
@@ -35,47 +33,16 @@ jobs:
           key: Library
           path: Library
       
+      #Builds the project
       - name: Build project
         uses: game-ci/unity-builder@v2.0-alpha-6
         with:
           unityVersion: 2020.2.1f1
           targetPlatform: WebGL
           
-      #Allows the build to be downloaded by saving it after build
+      #Saves the build so it can be downloaded from the actions screen
       - name: Upload build for download to git storage
         uses: actions/upload-artifact@v2
         with:
           name: Build
           path: build
-        
-  Deploy:
-    needs: [Build] #Stops this executing before building the project
-    name: Deploy to IBM Bucket
-    runs-on: ubuntu-latest
-    env:
-      GITHUB_SHA: ${{ github.sha }}
-      IBM_CLOUD_API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
-      IBM_CLOUD_REGION: eu-gb
-      IBM_CONTAINER_REGISTRY_REGION: uk-south
-    
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        
-        #Gets the build file from the previous job in artifacts, as GitHub doesn't share between jobs
-      - name: Get build file from previous job
-        uses: actions/download-artifact@v2
-        with:
-          name: Build
-          
-      - name:  Authorize AWS CLI to IBM Bucket
-        uses: ItsKarma/aws-cli@v1.70.0
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: eu-gb-smart
-        with:
-          args: --endpoint-url https://s3.eu-gb.cloud-object-storage.appdomain.cloud s3 cp --recursive WebGL/WebGL/ s3://ibm-hursley/
-          
-
-        
