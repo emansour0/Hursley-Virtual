@@ -75,7 +75,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: eu-gb-smart
         with:
-          args: aws --endpoint-url https://s3.eu-gb.cloud-object-storage.appdomain.cloud s3 cp --recursive WebGL/WebGL/ s3://ibm-hursley/
+          args: --endpoint-url https://s3.eu-gb.cloud-object-storage.appdomain.cloud s3 cp --recursive WebGL/WebGL/ s3://ibm-hursley/
           
 
         
