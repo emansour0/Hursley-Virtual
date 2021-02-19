@@ -74,4 +74,4 @@ jobs:
           BUCKET_NAME: webgl-bucket
 
         with:
-          args: --endpoint-url https://s3.eu-gb.cloud-object-storage.appdomain.cloud s3 cp --recursive WebGL/WebGL/ s3://${BUCKET_NAME}/
+          args: --endpoint-url https://s3.eu-gb.cloud-object-storage.appdomain.cloud s3 cp --recursive WebGL/WebGL/ s3://$BUCKET_NAME/
