@@ -71,7 +71,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ${{ secrets.S3_LOCATION }}
           BUCKET_ENDPOINT: https://s3.eu-gb.cloud-object-storage.appdomain.cloud
-          BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
+          BUCKET_NAME: webgl-bucket
 
         with:
-          args: --endpoint-url "$BUCKET_ENDPOINT" s3 cp --recursive WebGL/WebGL/ s3://$BUCKET_NAME/
+          args: --endpoint-url $BUCKET_ENDPOINT s3 cp --recursive WebGL/WebGL/ s3://$BUCKET_NAME/
