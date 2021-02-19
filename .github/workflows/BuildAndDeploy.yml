@@ -74,4 +74,4 @@ jobs:
           BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
 
         with:
-          args: --endpoint-url $BUCKET_ENDPOINT s3 cp --recursive WebGL/WebGL/ s3://$BUCKET_NAME/
+          args: --endpoint-url "$BUCKET_ENDPOINT" s3 cp --recursive WebGL/WebGL/ s3://$BUCKET_NAME/
