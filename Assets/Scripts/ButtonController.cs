@@ -49,7 +49,7 @@ public class ButtonController : MonoBehaviour
 #if !UNITY_EDITOR
         if (OpensLink)
         {
-            yield return new WaitForSecondsRealtime(anim.GetCurrentAnimatorStateInfo(0).length);
+            yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
             Utils.openWindow(InteractableLink);
         }
 #endif

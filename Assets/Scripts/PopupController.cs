@@ -7,13 +7,13 @@ public class PopupController : MonoBehaviour
 {
     public int PlayerLayer = 8; //Unity layer that the player is placed in
 
-    private float PlayerHeightOffset = 0.5f; //Offset along y axis so that pop ups angle slightly upwards towards the player head
-    private float HorizontalMargin = 0.2f;
-    private float VerticalMargin = 0.1f;
-    private float SpacingBetweenHeadingAndContent = 0.1f;
+    protected float PlayerHeightOffset = 0.5f; //Offset along y axis so that pop ups angle slightly upwards towards the player head
+    protected float HorizontalMargin = 0.2f;
+    protected float VerticalMargin = 0.1f;
+    protected float SpacingBetweenHeadingAndContent = 0.1f;
 
-    private int RotationSpeed = 3;
-    private int BackgroundExpansionSpeed = 2;
+    protected int RotationSpeed = 3;
+    protected int BackgroundExpansionSpeed = 2;
 
     public Transform Background;
     public Transform Heading;
@@ -22,11 +22,11 @@ public class PopupController : MonoBehaviour
     public TextMesh HeadingText;
     public TextMesh ContentText;
 
-    private Vector3 headingSize;
-    private Vector3 contentSize;
+    protected Vector3 headingSize;
+    protected Vector3 contentSize;
 
     //The size of the background when the player is at a distance and it only fits the heading
-    private Vector3 minBackgroundScale;
+    protected Vector3 minBackgroundScale;
 
     public int FollowPlayerRadius = 5;
     public int ShowContentRadius = 2;
@@ -36,7 +36,7 @@ public class PopupController : MonoBehaviour
     public string InteractableLink; //Link to show
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         //Gets the size in Unity dimensions of both 
         headingSize = HeadingText.GetComponent<MeshRenderer>().bounds.size;
@@ -50,8 +50,13 @@ public class PopupController : MonoBehaviour
         Content.transform.position = contentPos;
     }
 
+    public virtual void OnHover()
+    {
+        //Implementable by variants of this script and called by PlayerInteraction
+    }
+
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         int layerMask = 1 << PlayerLayer;
 
@@ -66,9 +71,7 @@ public class PopupController : MonoBehaviour
         else
         {
             Background.localScale = Vector3.Slerp(Background.localScale, minBackgroundScale, BackgroundExpansionSpeed * Time.deltaTime);
-            Vector3 originalPosition = Heading.position;
-            originalPosition.z = Background.position.z;
-            Background.position = Vector3.Slerp(Background.position, originalPosition, BackgroundExpansionSpeed * Time.deltaTime);
+            Background.localPosition = Vector3.Slerp(Background.localPosition, new Vector3(0, -0.1f, 4), BackgroundExpansionSpeed * Time.deltaTime);
             Content.SetActive(false);
         }
     }
@@ -90,7 +93,7 @@ public class PopupController : MonoBehaviour
     }
 
     //Scales the background to its initial size (only the Header shown)
-    private void scaleInitialBackground()
+    protected void scaleInitialBackground()
     {
         float width = contentSize.x < headingSize.x ? headingSize.x + HorizontalMargin : contentSize.x + HorizontalMargin;
         float height = headingSize.y + VerticalMargin * 0.5f;
@@ -98,12 +101,10 @@ public class PopupController : MonoBehaviour
         //Height is in the z axis because the plane is rotated, so z is the height and x is the width
         Background.localScale = new Vector3(width, 1, height);
         minBackgroundScale = Background.localScale;
-
-        Background.position = new Vector3(Heading.position.x, Heading.position.y, Background.position.z);
     }
 
     //Expands the background and displays the content text
-    private void showContent()
+    protected void showContent()
     {
         Content.SetActive(true); //Display content text
 
@@ -121,6 +122,7 @@ public class PopupController : MonoBehaviour
         initialPosition.z = Background.position.z;
 
         Background.position = Vector3.Slerp(Background.position, initialPosition, BackgroundExpansionSpeed * Time.deltaTime);
+        Background.localPosition = new Vector3(0, -0.1f, Background.localPosition.z);
     }
 
     //Returns the number of lines in a Text Box

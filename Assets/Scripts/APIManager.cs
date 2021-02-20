@@ -50,12 +50,12 @@ public static class ApiManager
 
             if (webRequest.result == UnityWebRequest.Result.ProtocolError || webRequest.result == UnityWebRequest.Result.ConnectionError)
             {
-                WatsonSessionEvent.Invoke(new ApiSessionMessage(ApiSessionMessage.Type.created, false));
+                WatsonSessionEvent.Invoke(new ApiSessionMessage(assistantId, ApiSessionMessage.Type.created, false));
                 yield break;
             }
 
             Session sessionMessage = JsonUtility.FromJson<Session>(webRequest.downloadHandler.text);
-            WatsonSessionEvent.Invoke(new ApiSessionMessage(ApiSessionMessage.Type.created, true, sessionMessage));
+            WatsonSessionEvent.Invoke(new ApiSessionMessage(assistantId, ApiSessionMessage.Type.created, true, sessionMessage));
         }
     }
 
@@ -69,10 +69,10 @@ public static class ApiManager
             {
                 Debug.Log($"{url}/v2/assistants/{assistantId}/sessions/{sessionId.session_id}");
                 Debug.Log(webRequest.error);
-                WatsonSessionEvent.Invoke(new ApiSessionMessage(ApiSessionMessage.Type.deleted, false, sessionId));
+                WatsonSessionEvent.Invoke(new ApiSessionMessage(assistantId, ApiSessionMessage.Type.deleted, false, sessionId));
                 yield break;
             }
-            WatsonSessionEvent.Invoke(new ApiSessionMessage(ApiSessionMessage.Type.deleted, true, sessionId));
+            WatsonSessionEvent.Invoke(new ApiSessionMessage(assistantId, ApiSessionMessage.Type.deleted, true, sessionId));
         }
     }
 
@@ -111,16 +111,19 @@ public class ApiSessionMessage : ApiMessage
 
     public Session Payload { get; private set; }
     public Type MessageType;
+    public string AssistantId;
 
-    public ApiSessionMessage(ApiSessionMessage.Type messageType, bool successful, Session payload)
+    public ApiSessionMessage(string assistantId, ApiSessionMessage.Type messageType, bool successful, Session payload)
     {
+        AssistantId = assistantId;
         Successful = successful;
         Payload = payload;
         MessageType = messageType;
     }
 
-    public ApiSessionMessage(ApiSessionMessage.Type messageType, bool successful)
+    public ApiSessionMessage(string assistantId, ApiSessionMessage.Type messageType, bool successful)
     {
+        AssistantId = assistantId;
         Successful = successful;
         MessageType = messageType;
     }

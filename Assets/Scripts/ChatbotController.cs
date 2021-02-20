@@ -67,6 +67,9 @@ public class ChatbotController : MonoBehaviour
 
     private void OnSessionChange(ApiSessionMessage message)
     {
+        //If this message has a different assistant ID, its for a different chatbot, so ignore it
+        if (message.AssistantId != AssistantId) return;
+
         if (message.MessageType == ApiSessionMessage.Type.created)
         {
             if (message.Successful)

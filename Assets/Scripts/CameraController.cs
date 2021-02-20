@@ -11,6 +11,8 @@ public class CameraController : MonoBehaviour
     private float yRotation = 0;
     private float yTargetRotation = 0;
 
+    private bool frozen;
+
     private float tempMouseSensitivity;
     private float tempSmoothingSpeed;
 
@@ -24,20 +26,28 @@ public class CameraController : MonoBehaviour
 
         ChatbotController.OpenChatbotEvent.AddListener(FreezeMovement);
         ChatbotController.CloseChatbotEvent.AddListener(UnFreezeMovement);
+        WebStateManager.OnApplicationFocusEvent.AddListener(UnFreezeMovement);
+        WebStateManager.OnApplicationUnfocusEvent.AddListener(FreezeMovement);
+
     }
 
     private void FreezeMovement(List<(string, ChatbotController.MessageType)> arg0, string arg1)
     {
-        MouseSensitivity = 0;
-        SmoothingSpeed = 50;
+        frozen = true;
+
+        Cursor.lockState = CursorLockMode.Confined;
+    }
+
+    private void FreezeMovement()
+    {
+        frozen = true;
 
         Cursor.lockState = CursorLockMode.Confined;
     }
 
     public void UnFreezeMovement()
     {
-        MouseSensitivity = tempMouseSensitivity;
-        SmoothingSpeed = tempSmoothingSpeed;
+        frozen = false;
 
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -45,6 +55,8 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (frozen) return;
+
         float mouseX = Input.GetAxis("Mouse X") * MouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * MouseSensitivity;
 

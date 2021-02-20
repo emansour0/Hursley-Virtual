@@ -34,6 +34,7 @@ public class PlayerInteraction : MonoBehaviour
         if (Physics.Raycast(forwardRay, out hit, InteractionDistance, popupMask))
         {
             PopupController popUpController = hit.collider.GetComponentInParent<PopupController>();
+            popUpController.OnHover();
 
             if(popUpController.OpensLink) ShowInteractUI(true);
 
@@ -58,7 +59,7 @@ public class PlayerInteraction : MonoBehaviour
                 StartCoroutine(buttonController.OnClick());
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Tab) && openChatbotController != null)
+        else if (Input.GetKeyDown(KeyCode.Escape) && openChatbotController != null)
         {
             openChatbotController.CloseChatbot();
             openChatbotController = null;

@@ -28,6 +28,16 @@ public static class Utils
         return Quaternion.LookRotation(relativePos) * Quaternion.Euler(-90, 0, 0);
     }
 
+    //Used to wait for a certain number of frames in a coroutine
+    public static IEnumerator Frames(int frameCount)
+    {
+        while (frameCount > 0)
+        {
+            frameCount--;
+            yield return null;
+        }
+    }
+
     [DllImport("__Internal")]
     public static extern void openWindow(string url);
 }
