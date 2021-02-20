@@ -2,10 +2,9 @@ name: Build and Deploy
 
 # Controls when the action will run. 
 on:
-  # Triggers the workflow when a release is created
-  release:
-    types: 
-      - created
+  # Triggers the workflow when a push is made to main
+  push:
+   branches: [ main ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -69,8 +68,7 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: eu-gb-smart
-          BUCKET_ENDPOINT: https://s3.eu-gb.cloud-object-storage.appdomain.cloud
+          AWS_DEFAULT_REGION: ${{ secrets.S3_LOCATION }}
 
         with:
-          args: --endpoint-url $BUCKET_ENDPOINT s3 cp --recursive WebGL/WebGL/ s3://ibm-hursley/
+          args: --endpoint-url https://s3.eu-gb.cloud-object-storage.appdomain.cloud s3 cp --recursive WebGL/WebGL/ s3://webgl-bucket/
