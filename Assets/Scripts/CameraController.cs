@@ -13,15 +13,9 @@ public class CameraController : MonoBehaviour
 
     private bool frozen;
 
-    private float tempMouseSensitivity;
-    private float tempSmoothingSpeed;
-
     // Start is called before the first frame update
     void Start()
     {
-        tempMouseSensitivity = MouseSensitivity;
-        tempSmoothingSpeed = SmoothingSpeed;
-
         Cursor.lockState = CursorLockMode.Locked;
 
         ChatbotController.OpenChatbotEvent.AddListener(FreezeMovement);
