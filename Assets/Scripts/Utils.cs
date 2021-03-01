@@ -28,14 +28,11 @@ public static class Utils
         return Quaternion.LookRotation(relativePos) * Quaternion.Euler(-90, 0, 0);
     }
 
-    //Used to wait for a certain number of frames in a coroutine
-    public static IEnumerator Frames(int frameCount)
+    public static (string, string) SeparateFirstSplit(this string source, char delimiter)
     {
-        while (frameCount > 0)
-        {
-            frameCount--;
-            yield return null;
-        }
+        var i = source.IndexOf(delimiter);
+
+        return i == -1 ? (source, null) : (source.Substring(0, i), source.Substring(i+1, source.Length - (i + 1)));
     }
 
     [DllImport("__Internal")]
