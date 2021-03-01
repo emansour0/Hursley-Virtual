@@ -34,12 +34,6 @@ public class MapController : MqttBase
         latitudeRange = UpperLatitudeBound - LowerLatitudeBound;
         longitudeRange = RightLongitudeBound - LeftLongitudeBound;
 
-        (float x, float y) = GetLocalPosition(50.7581f, -1.40646f);
-
-        GameObject markerInst = Instantiate(marker, transform.position, Quaternion.Euler(0, 0, 0));
-        markerInst.transform.Translate(x, y, 0.01f);
-        markerInst.transform.parent = transform;
-
 #if !UNITY_EDITOR
         if(MqttConnection !=null && ConnectionId != null)
             MqttManager.ConnectMqttBroker(this, ConnectionId, MqttConnection);
@@ -60,11 +54,11 @@ public class MapController : MqttBase
 
     public override void OnMqttMessageReceived(string topic, string message)
     {
+        if (topic.Contains("test")) return; //ignore the test message
+
         FerryMessage data = JsonUtility.FromJson<MapController.FerryMessage>(message);
 
         (float x, float y) = GetLocalPosition(data.position[0], data.position[1]);
-        Debug.Log(message);
-        Debug.Log($"Latitude: {data.position[0]}  Longitude: {data.position[1]}");
 
         GameObject markerInst = Instantiate(marker, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
         markerInst.transform.Translate(x, y, 0.01f);
@@ -78,10 +72,11 @@ public class MapController : MqttBase
 
         markers.Add(topic, markerInst);
 
-
-        GameObject popup = markers[topic].GetComponent<HoverAndShowController>().PopupTemplate;
-        popup.transform.GetChild(0).GetComponent<TextMesh>().text = topic;
-        popup.transform.GetChild(1).GetComponent<TextMesh>().text = $"Latitude: {data.position[0]}\nLongitude: {data.position[1]}";
+        HoverAndShowController markerController = markers[topic].GetComponent<HoverAndShowController>();
+        GameObject popup = markerController.PopupTemplate;
+        markerController.PopupDecay = 0;
+        markerController.Heading = topic.Split('/')[topic.Split('/').Length - 1];
+        markerController.Content = $"Latitude: {data.position[0]}\nLongitude: {data.position[1]}";
     }
 
     [Serializable]

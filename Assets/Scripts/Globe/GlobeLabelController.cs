@@ -5,8 +5,6 @@ using UnityEngine;
 public class GlobeLabelController : PopupController
 {
     private bool hovered;
-    public Color Highlighted;
-    public Color Normal;
 
     protected override void Start()
     {
@@ -41,8 +39,9 @@ public class GlobeLabelController : PopupController
         }
     }
 
-    public override void OnHover()
+    public override bool OnHover(Transform t)
     {
         hovered = true;
+        return false;
     }
 }

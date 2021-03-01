@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-public class PopupController : MonoBehaviour
+public class PopupController : MonoBehaviour, IInteractableBase
 {
     public int PlayerLayer = 8; //Unity layer that the player is placed in
 
@@ -48,11 +48,13 @@ public class PopupController : MonoBehaviour
         Vector3 contentPos = Content.transform.position;
         contentPos.y = Heading.position.y - (contentSize.y * 0.5f + headingSize.y * 0.5f + SpacingBetweenHeadingAndContent);
         Content.transform.position = contentPos;
+        Background.localPosition = new Vector3(0, -0.1f, 4);
     }
 
-    public virtual void OnHover()
+    public virtual bool OnHover(Transform t)
     {
         //Implementable by variants of this script and called by PlayerInteraction
+        return OpensLink;
     }
 
     // Update is called once per frame

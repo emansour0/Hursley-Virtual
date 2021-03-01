@@ -35,6 +35,22 @@ public static class Utils
         return i == -1 ? (source, null) : (source.Substring(0, i), source.Substring(i+1, source.Length - (i + 1)));
     }
 
+    //Gets script attached to either children, parent or the gameobject itself
+    public static T GetComponentAcrossGameobject<T>(GameObject g)
+    {
+        T output;
+
+        if (g.TryGetComponent<T>(out output)) return output;
+
+        output = g.GetComponentInParent<T>();
+
+        if (output != null) return output;
+
+        output = g.GetComponentInChildren<T>();
+
+        return output;
+    }
+
     [DllImport("__Internal")]
     public static extern void openWindow(string url);
 }

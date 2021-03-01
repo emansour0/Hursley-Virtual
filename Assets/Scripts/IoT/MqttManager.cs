@@ -40,8 +40,6 @@ public static class MqttManager
         (string connectionId, string payload) = message.SeparateFirstSplit(':');
         (string topic, string content) = payload.SeparateFirstSplit(':');
 
-        Debug.Log($"Connection ID: {connectionId},   Payload: {payload}");
-
         ActiveMqttConnection connection = connections[connectionId];
         connection.Callback.OnMqttMessageReceived(topic, content);
     }

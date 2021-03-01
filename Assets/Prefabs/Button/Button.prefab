@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 676443081579782751}
   - component: {fileID: 676443081579782748}
   - component: {fileID: 676443081579782749}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Button Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,6 +56,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -80,6 +81,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &676443081579782749
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -105,7 +107,7 @@ GameObject:
   - component: {fileID: 676443081972499191}
   - component: {fileID: 676443081972499188}
   - component: {fileID: 262396023372171100}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Clickable_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,6 +151,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -173,6 +176,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!95 &262396023372171100
 Animator:
   serializedVersion: 3
@@ -204,7 +208,7 @@ GameObject:
   - component: {fileID: 6710504264958378310}
   - component: {fileID: 7727197573357295416}
   - component: {fileID: -6534292585164605048}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,7 +259,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7801884380739215696}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.4, y: 0.8, z: 1.4}
@@ -276,6 +280,10 @@ MonoBehaviour:
   PopupTime: 0.01
   ButtonPopup: {fileID: 953614858942737479, guid: f1164396ee7345a409e9154847609812,
     type: 3}
+  OpensLink: 0
+  InteractableLink: 
+  PopupHeading: 
+  PopupContent: 
 --- !u!1 &8372319735158690001
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,7 +293,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7012612510983642956}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: popup
   m_TagString: Untagged
   m_Icon: {fileID: 0}

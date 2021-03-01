@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-public class ButtonController : MonoBehaviour
+public class ButtonController : MonoBehaviour, IInteractableBase
 {
     Animator anim;
     public Transform popupPosition;
@@ -26,7 +26,7 @@ public class ButtonController : MonoBehaviour
         ButtonPopup.transform.GetChild(1).GetComponent<TextMesh>().text = PopupContent;
     }
 
-    public void OnHover(Transform player)
+    public bool OnHover(Transform player)
     {
         if (popup == null)
         {
@@ -41,9 +41,16 @@ public class ButtonController : MonoBehaviour
         }
 
         PopupTimeout = StartCoroutine(DestroyPopup());
+
+        return OpensLink;
     }
 
-    public IEnumerator OnClick()
+    public void OnClick()
+    {
+        StartCoroutine(OnClickRoutine());
+    }
+
+    public IEnumerator OnClickRoutine()
     {
         anim.SetTrigger("button_pressed");
 #if !UNITY_EDITOR

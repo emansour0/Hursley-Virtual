@@ -2,21 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HoverAndShowController : MonoBehaviour
+public class HoverAndShowController : MonoBehaviour, IInteractableBase
 {
+    public string Heading;
+    public string Content;
+
     public GameObject PopupTemplate;
     public Transform PopupPosition;
     GameObject popup;
-    public float PopupDecay = 0.1f;
+    public float PopupDecay = 0;
     private Coroutine PopupTimeout;
 
     //Call this to display 
-    public void OnHover(Transform player)
+    public bool OnHover(Transform player)
     {
         if (popup == null)
         {
             //Create the popup and rotate it to face the player
             popup = Instantiate(PopupTemplate, PopupPosition.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+
+            popup.transform.GetChild(0).GetComponent<TextMesh>().text = Heading;
+            popup.transform.GetChild(1).GetComponent<TextMesh>().text = Content;
+
             Quaternion rotationToPlayer = Utils.FindRotationToObject(transform, player);
             popup.transform.rotation = rotationToPlayer;
         }
@@ -26,6 +33,8 @@ public class HoverAndShowController : MonoBehaviour
         }
 
         PopupTimeout = StartCoroutine(DestroyPopup());
+
+        return false;
     }
 
     IEnumerator DestroyPopup()
@@ -43,5 +52,10 @@ public class HoverAndShowController : MonoBehaviour
         }
 
         Destroy(popup);
+    }
+
+    public void OnClick()
+    {
+        //Do nothing, just hover
     }
 }

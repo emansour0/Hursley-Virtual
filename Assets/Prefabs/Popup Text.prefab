@@ -156,7 +156,7 @@ MonoBehaviour:
   HeadingText: {fileID: 8402292896399019992}
   ContentText: {fileID: 8402292896192776929}
   FollowPlayerRadius: 5
-  ShowContentRadius: 2
+  ShowContentRadius: 3
   OpensLink: 0
   InteractableLink: https://visithursley.eu-gb.mybluemix.net/
 --- !u!1 &8402292896399019999

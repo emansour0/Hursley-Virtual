@@ -349,7 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 577ede36a560bc444901b00f5f77e4f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MouseSensitivity: 2
+  MouseSensitivity: 1.5
   SmoothingSpeed: 2
 --- !u!114 &226295743
 MonoBehaviour:
@@ -396,10 +396,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractionDistance: 2
-  PopupLayer: 9
-  ButtonLayer: 10
+  InteractablesLayer: 9
   ChatbotLayer: 11
-  HoverAndShowLayer: 12
   InteractionUI: {fileID: 1643568532}
 --- !u!1 &233140771
 GameObject:
@@ -447,7 +445,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 7db944018fc4a264b943d842811e9aaf,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7db944018fc4a264b943d842811e9aaf,
         type: 3}
@@ -1111,7 +1109,7 @@ PrefabInstance:
     - target: {fileID: 676443081579782747, guid: 7bfcf23e157350b48a643aaa113d1d92,
         type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 676443081972499186, guid: 7bfcf23e157350b48a643aaa113d1d92,
         type: 3}
@@ -1121,7 +1119,7 @@ PrefabInstance:
     - target: {fileID: 676443081972499186, guid: 7bfcf23e157350b48a643aaa113d1d92,
         type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 676443081972499189, guid: 7bfcf23e157350b48a643aaa113d1d92,
         type: 3}
@@ -1136,7 +1134,7 @@ PrefabInstance:
     - target: {fileID: 4435992652915408565, guid: 7bfcf23e157350b48a643aaa113d1d92,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4435992652915408565, guid: 7bfcf23e157350b48a643aaa113d1d92,
         type: 3}
@@ -1206,7 +1204,12 @@ PrefabInstance:
     - target: {fileID: 7801884380739215696, guid: 7bfcf23e157350b48a643aaa113d1d92,
         type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372319735158690001, guid: 7bfcf23e157350b48a643aaa113d1d92,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bfcf23e157350b48a643aaa113d1d92, type: 3}
@@ -1464,7 +1467,7 @@ PrefabInstance:
     - target: {fileID: 8402292896348941519, guid: 438705fda4bc2a546900bb83b7189840,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8402292896348941519, guid: 438705fda4bc2a546900bb83b7189840,
         type: 3}
@@ -1979,6 +1982,90 @@ MonoBehaviour:
   clockwise: 1
   direction: 1
   directionChangeSpeed: 2
+--- !u!1001 &1536931248
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8402292896192776929, guid: 438705fda4bc2a546900bb83b7189840,
+        type: 3}
+      propertyPath: m_Text
+      value: "This artwork is showing live location\ndata from ferries travelling
+        between \nEngland and Jersey. It is a replica \nof the real artwork, designed
+        by Andy \nStanford-Clark, currently in Hursley.\n\nHover over the blue dots
+        to see\ninformation about each ferry."
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402292896348941517, guid: 438705fda4bc2a546900bb83b7189840,
+        type: 3}
+      propertyPath: m_Name
+      value: Ferry Artwork Popup
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402292896348941519, guid: 438705fda4bc2a546900bb83b7189840,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402292896348941519, guid: 438705fda4bc2a546900bb83b7189840,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.224377
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402292896348941519, guid: 438705fda4bc2a546900bb83b7189840,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.555
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402292896348941519, guid: 438705fda4bc2a546900bb83b7189840,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.905
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402292896348941519, guid: 438705fda4bc2a546900bb83b7189840,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402292896348941519, guid: 438705fda4bc2a546900bb83b7189840,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402292896348941519, guid: 438705fda4bc2a546900bb83b7189840,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402292896348941519, guid: 438705fda4bc2a546900bb83b7189840,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402292896348941519, guid: 438705fda4bc2a546900bb83b7189840,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402292896348941519, guid: 438705fda4bc2a546900bb83b7189840,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402292896348941519, guid: 438705fda4bc2a546900bb83b7189840,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402292896399019992, guid: 438705fda4bc2a546900bb83b7189840,
+        type: 3}
+      propertyPath: m_Text
+      value: 'Artwork Powered by
+
+        IoT Technology'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 438705fda4bc2a546900bb83b7189840, type: 3}
 --- !u!1 &1595686022 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7db944018fc4a264b943d842811e9aaf,
@@ -2053,7 +2140,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -1.1589355}
+  m_AnchoredPosition: {x: 0, y: -1.158905}
   m_SizeDelta: {x: -571.053, y: -209.22601}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &1641986287
@@ -2394,7 +2481,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.000061035156}
   m_SizeDelta: {x: -25.652, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1793393027
@@ -2555,7 +2642,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1803022622}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.056844473, y: 2.891, z: -10.140178}
+  m_LocalPosition: {x: 9.685, y: 2.891, z: 4.527}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1450378412}
@@ -2607,7 +2694,7 @@ PrefabInstance:
     - target: {fileID: 8402292896348941519, guid: 438705fda4bc2a546900bb83b7189840,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8402292896348941519, guid: 438705fda4bc2a546900bb83b7189840,
         type: 3}
@@ -2741,75 +2828,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1885877322}
   m_CullTransparentMesh: 1
---- !u!1001 &1966809509
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6693000699774094001, guid: 39ef9fa6151f0be49b3f46ac2411093b,
-        type: 3}
-      propertyPath: m_Name
-      value: Ferry Marker
-      objectReference: {fileID: 0}
-    - target: {fileID: 6693000699774094002, guid: 39ef9fa6151f0be49b3f46ac2411093b,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6693000699774094002, guid: 39ef9fa6151f0be49b3f46ac2411093b,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6693000699774094002, guid: 39ef9fa6151f0be49b3f46ac2411093b,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.477
-      objectReference: {fileID: 0}
-    - target: {fileID: 6693000699774094002, guid: 39ef9fa6151f0be49b3f46ac2411093b,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1.19
-      objectReference: {fileID: 0}
-    - target: {fileID: 6693000699774094002, guid: 39ef9fa6151f0be49b3f46ac2411093b,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6693000699774094002, guid: 39ef9fa6151f0be49b3f46ac2411093b,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6693000699774094002, guid: 39ef9fa6151f0be49b3f46ac2411093b,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6693000699774094002, guid: 39ef9fa6151f0be49b3f46ac2411093b,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6693000699774094002, guid: 39ef9fa6151f0be49b3f46ac2411093b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6693000699774094002, guid: 39ef9fa6151f0be49b3f46ac2411093b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6693000699774094002, guid: 39ef9fa6151f0be49b3f46ac2411093b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 39ef9fa6151f0be49b3f46ac2411093b, type: 3}
 --- !u!1001 &2006864855
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2820,7 +2838,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 7db944018fc4a264b943d842811e9aaf,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7db944018fc4a264b943d842811e9aaf,
         type: 3}
@@ -2835,7 +2853,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 7db944018fc4a264b943d842811e9aaf,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.919
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7db944018fc4a264b943d842811e9aaf,
         type: 3}
@@ -2899,7 +2917,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 63d1955600829ec4695717124092f906,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 63d1955600829ec4695717124092f906,
         type: 3}
@@ -3025,7 +3043,7 @@ RectTransform:
   m_GameObject: {fileID: 2131213684}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 1416164837}
   m_RootOrder: 0
@@ -3033,7 +3051,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2131213686
 MonoBehaviour:
@@ -3057,11 +3075,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 5ab9f72534474074a87ee92a2d5950f2, type: 3}
-    m_FontSize: 20
+    m_FontSize: 100
     m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 2
-    m_MaxSize: 40
+    m_MinSize: 1
+    m_MaxSize: 100
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -3097,7 +3115,7 @@ PrefabInstance:
     - target: {fileID: 8402292896348941519, guid: 438705fda4bc2a546900bb83b7189840,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8402292896348941519, guid: 438705fda4bc2a546900bb83b7189840,
         type: 3}
