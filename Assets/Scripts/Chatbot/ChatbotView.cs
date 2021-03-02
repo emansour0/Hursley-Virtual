@@ -99,6 +99,6 @@ public class ChatbotView : MonoBehaviour
 
     private void GenerateWelcomeMessage()
     {
-        WelcomeMessage.text = $"You are now talking to {activeChatbot.Replace("_", " ")}, say hi!\nPress TAB at any time to exit";
+        WelcomeMessage.text = $"You are now talking to {activeChatbot.Replace("_", " ")}, say hi!\nPress the ESC key at any time to exit";
     }
 }
