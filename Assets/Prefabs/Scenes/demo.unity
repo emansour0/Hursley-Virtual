@@ -1106,6 +1106,11 @@ PrefabInstance:
       propertyPath: InteractableLink
       value: http://hursleyhouse.eu-gb.mybluemix.net/index.html
       objectReference: {fileID: 0}
+    - target: {fileID: -6534292585164605048, guid: 7bfcf23e157350b48a643aaa113d1d92,
+        type: 3}
+      propertyPath: TimeTillLinkOpens
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 676443081579782747, guid: 7bfcf23e157350b48a643aaa113d1d92,
         type: 3}
       propertyPath: m_Layer
@@ -1134,7 +1139,7 @@ PrefabInstance:
     - target: {fileID: 4435992652915408565, guid: 7bfcf23e157350b48a643aaa113d1d92,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4435992652915408565, guid: 7bfcf23e157350b48a643aaa113d1d92,
         type: 3}
@@ -3116,7 +3121,7 @@ PrefabInstance:
     - target: {fileID: 8402292896348941519, guid: 438705fda4bc2a546900bb83b7189840,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8402292896348941519, guid: 438705fda4bc2a546900bb83b7189840,
         type: 3}
