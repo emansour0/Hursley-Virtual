@@ -58,13 +58,18 @@ public class MapController : MqttBase
 
         FerryMessage data = JsonUtility.FromJson<MapController.FerryMessage>(message);
 
-        (float x, float y) = GetLocalPosition(data.position[0], data.position[1]);
+        float latitude = data.position[0];
+        float longitude = data.position[1];
+
+        if (!IsOnMap(latitude, longitude)) return; //if the point isnt on the map, ignore it
+        
+        (float x, float y) = GetLocalPosition(latitude, longitude);
 
         GameObject markerInst = Instantiate(marker, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
         markerInst.transform.Translate(x, y, 0.01f);
         markerInst.transform.parent = transform;
 
-        if(markers.ContainsKey(topic))
+        if (markers.ContainsKey(topic))
         {
             Destroy(markers[topic]);
             markers.Remove(topic);
@@ -77,6 +82,15 @@ public class MapController : MqttBase
         markerController.PopupDecay = 0;
         markerController.Heading = topic.Split('/')[topic.Split('/').Length - 1];
         markerController.Content = $"Latitude: {data.position[0]}\nLongitude: {data.position[1]}";
+    }
+
+    private bool IsOnMap(float latitude, float longitude)
+    {
+        if (latitude < LowerLatitudeBound || latitude > UpperLatitudeBound) return false;
+
+        if (longitude < LeftLongitudeBound || longitude > RightLongitudeBound) return false;
+
+        return true;
     }
 
     [Serializable]

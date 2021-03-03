@@ -94,7 +94,6 @@ public static class ApiManager
                 WatsonMessageEvent.Invoke(new ApiResponseMessage(false, sessionId, message));
                 yield break;
             }
-            Debug.Log(webRequest.downloadHandler.text);
             Message responseMessage = JsonUtility.FromJson<Message>(webRequest.downloadHandler.text);
             WatsonMessageEvent.Invoke(new ApiResponseMessage(true, responseMessage, sessionId, message));
         }

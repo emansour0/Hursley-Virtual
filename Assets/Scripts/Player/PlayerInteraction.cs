@@ -31,8 +31,7 @@ public class PlayerInteraction : MonoBehaviour
 
             if (interact) ShowInteractUI(true);
 
-            //If the object hit was a pop up and the user clicked the mouse (0 corresponds to the left button on the mouse)
-            if(hit.collider.CompareTag("Pop Up") && Input.GetMouseButtonDown(0))
+            if(Input.GetMouseButtonDown(0))
             {
                 interactable.OnClick();
             }

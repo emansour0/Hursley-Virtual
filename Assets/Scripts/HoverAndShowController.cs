@@ -49,6 +49,8 @@ public class HoverAndShowController : MonoBehaviour, IInteractableBase
             content.color = new Color32((byte)(255 * content.color.r), (byte)(255 * content.color.g), (byte)(255 * content.color.b), (byte)i);
 
             yield return new WaitForSeconds(PopupDecay);
+
+            if (PopupDecay == 0) break;
         }
 
         Destroy(popup);

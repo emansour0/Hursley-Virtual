@@ -284,6 +284,7 @@ MonoBehaviour:
   InteractableLink: 
   PopupHeading: 
   PopupContent: 
+  TimeTillLinkOpens: 0
 --- !u!1 &8372319735158690001
 GameObject:
   m_ObjectHideFlags: 0

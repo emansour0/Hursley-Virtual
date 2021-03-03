@@ -19,11 +19,31 @@ public class ButtonController : MonoBehaviour, IInteractableBase
 
     private Coroutine PopupTimeout;
 
+    public float TimeTillLinkOpens;
+    private float openLinkDelay;
+
     void Start()
     {
         anim = GetComponent<Animator>();
         ButtonPopup.transform.GetChild(0).GetComponent<TextMesh>().text = PopupHeading;
         ButtonPopup.transform.GetChild(1).GetComponent<TextMesh>().text = PopupContent;
+    }
+
+    void Update()
+    {
+        //Workaround a coroutine bug in Unity 2020.2 which stops the previous code from opening a link after the animation has played
+        if (openLinkDelay > 0)
+        {
+            openLinkDelay -= Time.deltaTime;
+
+            if (openLinkDelay < 0)
+            {
+                openLinkDelay = 0;
+#if !UNITY_EDITOR
+                Utils.openWindow(InteractableLink);
+#endif
+            }
+        }
     }
 
     public bool OnHover(Transform player)
@@ -32,7 +52,7 @@ public class ButtonController : MonoBehaviour, IInteractableBase
         {
             //Create the popup and rotate it to face the player
             popup = Instantiate(ButtonPopup, popupPosition.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-            Quaternion rotationToPlayer =Utils.FindRotationToObject(transform, player);
+            Quaternion rotationToPlayer = Utils.FindRotationToObject(transform, player);
             popup.transform.rotation = rotationToPlayer;
         }
         else
@@ -47,20 +67,11 @@ public class ButtonController : MonoBehaviour, IInteractableBase
 
     public void OnClick()
     {
-        StartCoroutine(OnClickRoutine());
-    }
-
-    public IEnumerator OnClickRoutine()
-    {
-        anim.SetTrigger("button_pressed");
-#if !UNITY_EDITOR
         if (OpensLink)
         {
-            yield return new WaitForSeconds(1);
-            Utils.openWindow(InteractableLink);
+            openLinkDelay = TimeTillLinkOpens;
         }
-#endif
-        yield break;
+        anim.SetTrigger("button_pressed");
     }
 
     IEnumerator DestroyPopup()
