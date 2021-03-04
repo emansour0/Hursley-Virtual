@@ -1400,7 +1400,6 @@ MonoBehaviour:
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
-  m_ShouldActivateOnSelect: 1
 --- !u!114 &1046696986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2104,9 +2103,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChatbotName: VP Painting
-  Url: https://api.eu-de.assistant.watson.cloud.ibm.com/instances/dc64d027-33cd-44ae-91de-c6549821fed5
-  AssistantId: 5a4976c7-b43b-4e1e-960a-4209221da204
-  ApiKey: 3wqZoI_dxhTzuC_1R0cN3sr6ERYiIPZWh6Wpy8a8brKW
+  Url: https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/17c8cf21-2176-441c-a5ba-3b03cec3fdd7
+  AssistantId: 2d0c6cd8-b21d-4759-a422-1fbe32f601fb
+  ApiKey: Bh_2hz3pr11XJEOmLdewCwqtP5hXWtL_IfdmYJp7x47t
   Version: 2020-04-01
 --- !u!1 &1641986285
 GameObject:
@@ -2975,6 +2974,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6019679308074869713, guid: 63d1955600829ec4695717124092f906,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: -3900257091620774412, guid: 63d1955600829ec4695717124092f906,
         type: 3}
       propertyPath: m_Materials.Array.data[1]
@@ -3019,6 +3023,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Hursley Building
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 63d1955600829ec4695717124092f906,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068572801739081199, guid: 63d1955600829ec4695717124092f906,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378922297957006227, guid: 63d1955600829ec4695717124092f906,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 3075799322262644527, guid: 63d1955600829ec4695717124092f906,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4890884700783565814, guid: 63d1955600829ec4695717124092f906,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 5633624700483277996, guid: 63d1955600829ec4695717124092f906,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63d1955600829ec4695717124092f906, type: 3}
