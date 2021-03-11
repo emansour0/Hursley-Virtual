@@ -13,7 +13,7 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# Gets an activation file for Unity, which can be used by GitHub Actions
 jobs:
   activation:
     name: Request manual activation file 🔑
@@ -23,7 +23,7 @@ jobs:
         id: getManualLicenseFile
         uses: game-ci/unity-request-activation-file@v2.0-alpha-1
         with:
-          unityVersion: 2020.2.1f1
+          unityVersion: 2020.2.1f1 #Change this to match the project version
     
       - name: Expose as artifact
         uses: actions/upload-artifact@v1
