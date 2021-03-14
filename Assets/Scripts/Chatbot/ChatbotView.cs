@@ -48,7 +48,7 @@ public class ChatbotView : MonoBehaviour
     private void CloseChatbot()
     {
         //Destroy all messages displayed in the messages pane before closing, so this panel can be reused
-        for (int i = 0; i < Content.childCount; i++)
+        for (int i = 1; i < Content.childCount; i++)
         {
             Destroy(Content.GetChild(i).gameObject);
         }
