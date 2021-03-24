@@ -307,7 +307,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: cc86180f648210d4b83ba2010cb688b6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0016610057
+      value: 0.0221
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cc86180f648210d4b83ba2010cb688b6,
         type: 3}
@@ -3202,7 +3202,7 @@ PrefabInstance:
     - target: {fileID: 8402292896399019992, guid: 438705fda4bc2a546900bb83b7189840,
         type: 3}
       propertyPath: m_Text
-      value: Hursley Briefing Center
+      value: Hursley Briefing Centre
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 438705fda4bc2a546900bb83b7189840, type: 3}
@@ -4396,9 +4396,9 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: "This artwork is showing live location\ndata from ferries travelling
-        between \nEngland and Jersey. It is a replica \nof the real artwork, designed
-        by Andy \nStanford-Clark, currently in Hursley.\n\nHover over the blue dots
-        to see\ninformation about each ferry."
+        between \nEngland and the Isle of Wight. It is a replica \nof the real artwork,
+        designed by Andy \nStanford-Clark, currently in Hursley.\n\nHover over the
+        blue dots to see\ninformation about each ferry."
       objectReference: {fileID: 0}
     - target: {fileID: 8402292896348941517, guid: 438705fda4bc2a546900bb83b7189840,
         type: 3}
