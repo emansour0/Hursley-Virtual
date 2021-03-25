@@ -2,14 +2,12 @@ var MqttPlugin = {
 
     connectMqtt : function (connectionId_param, host_param, username_param, password_param, path_param, topic_param, useSSL_param, cleanSession_param, port, onConnectCallback, onMessageCallback) {
 
-        connectionId = Pointer_stringify(connectionId_param)
-        host = Pointer_stringify(host_param)
-        username = Pointer_stringify(username_param)
-        password = Pointer_stringify(password_param)
-        path = Pointer_stringify(path_param)
-        topic = Pointer_stringify(topic_param)
-        console.log(useSSL_param);
-        console.log(cleanSession_param);
+        connectionId = Pointer_stringify(connectionId_param);
+        host = Pointer_stringify(host_param);
+        username = Pointer_stringify(username_param);
+        password = Pointer_stringify(password_param);
+        path = Pointer_stringify(path_param);
+        topic = Pointer_stringify(topic_param);
 
         client = new Paho.MQTT.Client(host, port, path);
 

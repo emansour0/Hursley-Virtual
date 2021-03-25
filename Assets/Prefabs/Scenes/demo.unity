@@ -4312,9 +4312,9 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: "This artwork is showing live location\ndata from ferries travelling
-        between \nEngland and Jersey. It is a replica \nof the real artwork, designed
-        by Andy \nStanford-Clark, currently in Hursley.\n\nHover over the blue dots
-        to see\ninformation about each ferry."
+        between \nEngland and Isle of Wight. It is a replica \nof the real artwork,
+        designed by Andy \nStanford-Clark, currently in Hursley.\n\nHover over the
+        blue dots to see\ninformation about each ferry."
       objectReference: {fileID: 0}
     - target: {fileID: 8402292896348941517, guid: 438705fda4bc2a546900bb83b7189840,
         type: 3}
