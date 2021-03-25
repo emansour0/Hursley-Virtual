@@ -1,0 +1,21 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Cleanup Old Artifacts
+
+# Controls when the action will run. 
+on:
+  schedule:
+    - cron: '0 3 * * *'
+  
+
+  workflow_dispatch:
+
+# A workflow that deletes build files when they've been there a certain time
+jobs:
+  delete-artifacts:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: kolpav/purge-artifacts-action@v1
+          with:
+            token: $
+            expire-in: 7days # Builds are deleted after 7 days
