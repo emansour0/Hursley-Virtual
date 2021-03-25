@@ -42,6 +42,7 @@ public class ChatbotView : MonoBehaviour
 
         ShowChatbotUI(true);
 
+        MessageBox.enabled = true;
         MessageBox.ActivateInputField();
     }
 
@@ -56,6 +57,8 @@ public class ChatbotView : MonoBehaviour
         //Makes UI disappear
         ShowChatbotUI(false);
         ResetMessageBox();
+        MessageBox.DeactivateInputField();
+        MessageBox.enabled = false; //This stops random key presses being sent to watson after closing the chatbot
     }
 
     public void SendChatbotMessage(string message)
