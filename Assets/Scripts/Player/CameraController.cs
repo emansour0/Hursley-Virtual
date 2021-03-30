@@ -22,6 +22,7 @@ public class CameraController : MonoBehaviour
         ChatbotController.CloseChatbotEvent.AddListener(UnFreezeMovement);
     }
 
+    //Used to freeze the player, currently called when they click on a chatbot to stop their screen from moving
     private void FreezeMovement(List<(string, ChatbotController.MessageType)> arg0, string arg1)
     {
         frozen = true;
@@ -29,13 +30,7 @@ public class CameraController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
     }
 
-    private void FreezeMovement()
-    {
-        frozen = true;
-
-        Cursor.lockState = CursorLockMode.Confined;
-    }
-
+    //Removes the effects of the FreezeMovement() method
     public void UnFreezeMovement()
     {
         frozen = false;
@@ -43,9 +38,9 @@ public class CameraController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        //If the frozen bool is set, we don't want the camera to move, so ignore all code in the update
         if (frozen) return;
 
         float mouseX = Input.GetAxis("Mouse X") * MouseSensitivity;
@@ -56,8 +51,8 @@ public class CameraController : MonoBehaviour
         xRotation = Mathf.Lerp(xRotation, mouseX, SmoothingSpeed * Time.deltaTime);
         yRotation = Mathf.Lerp(yRotation, yTargetRotation, SmoothingSpeed * Time.deltaTime);
 
-
         transform.localRotation = Quaternion.Euler(transform.localRotation.y + yRotation, 0, 0);
         transform.parent.transform.Rotate(Vector3.up * xRotation);
     }
+
 }

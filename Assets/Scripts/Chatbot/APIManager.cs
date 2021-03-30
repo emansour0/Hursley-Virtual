@@ -41,7 +41,6 @@ public static class ApiManager
     }
 
     //TODO Version config file
-    //TODO version changing
     public static IEnumerator CreateSession(string url, string apikey, string version, string assistantId)
     {
         using (UnityWebRequest webRequest = GetWebRequest(RequestType.Post, $"{url}/v2/assistants/{assistantId}/sessions", version, apikey, ""))
@@ -83,7 +82,6 @@ public static class ApiManager
 
         using (UnityWebRequest webRequest = GetWebRequest(RequestType.Post, $"{url}/v2/assistants/{assistantId}/sessions/{sessionId.session_id}/message", version, apikey, payload))
         {
-            webRequest.uploadHandler = new UploadHandlerRaw(bodyRaw);
             webRequest.uploadHandler = new UploadHandlerRaw(bodyRaw);
             webRequest.downloadHandler = new DownloadHandlerBuffer();
 
