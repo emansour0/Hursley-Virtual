@@ -5,11 +5,14 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float MouseSensitivity = 3;
-    public float SmoothingSpeed = 2;
-    private float xRotation = 0;
+    public float MouseSensitivity = 1;
+    public float SmoothingTime = 0.1f;
+    private float xSmoothingSpeed = 0;
+    private float ySmoothingSpeed = 0;
+    private float xRotation = 180;
     private float yRotation = 0;
     private float yTargetRotation = 0;
+    private float xTargetRotation = 180;
 
     private bool frozen;
 
@@ -57,12 +60,12 @@ public class CameraController : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y") * MouseSensitivity;
 
         yTargetRotation = Mathf.Clamp(yTargetRotation - mouseY, -90, 90);
+        xTargetRotation = xTargetRotation + mouseX;
 
-        xRotation = Mathf.Lerp(xRotation, mouseX, SmoothingSpeed * Time.deltaTime);
-        yRotation = Mathf.Lerp(yRotation, yTargetRotation, SmoothingSpeed * Time.deltaTime);
+        xRotation = Mathf.SmoothDamp(xRotation, xTargetRotation, ref xSmoothingSpeed, SmoothingTime);
+        yRotation = Mathf.SmoothDamp(yRotation, yTargetRotation, ref ySmoothingSpeed, SmoothingTime);
 
         transform.localRotation = Quaternion.Euler(transform.localRotation.y + yRotation, 0, 0);
-        transform.parent.transform.Rotate(Vector3.up * xRotation);
+        transform.parent.rotation = Quaternion.Euler(0, transform.parent.rotation.y + xRotation, 0);    
     }
-
 }
