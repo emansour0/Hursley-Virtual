@@ -11,6 +11,13 @@ public class PauseMenu : MonoBehaviour
     public static UnityEvent FreezeCameraEvent = new UnityEvent();
     public static UnityEvent ResumeCameraEvent = new UnityEvent();
 
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(1) && isPaused) {
+            Resume();
+        }
+    }
+
     public void Resume()
     {
         ResumeCameraEvent.Invoke();

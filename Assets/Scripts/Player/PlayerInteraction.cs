@@ -31,7 +31,7 @@ public class PlayerInteraction : MonoBehaviour
 
             if (interact) ShowInteractUI(true);
 
-            if(Input.GetMouseButtonDown(0))
+            if(Input.GetMouseButtonDown(0) && !PauseMenu.isPaused)
             {
                 interactable.OnClick();
             }
