@@ -20,6 +20,8 @@ public class CameraController : MonoBehaviour
 
         ChatbotController.OpenChatbotEvent.AddListener(FreezeMovement);
         ChatbotController.CloseChatbotEvent.AddListener(UnFreezeMovement);
+        PauseMenu.FreezeCameraEvent.AddListener(FreezeMovement);
+        PauseMenu.ResumeCameraEvent.AddListener(UnFreezeMovement);
     }
 
     //Used to freeze the player, currently called when they click on a chatbot to stop their screen from moving
@@ -28,6 +30,14 @@ public class CameraController : MonoBehaviour
         frozen = true;
 
         Cursor.lockState = CursorLockMode.Confined;
+    }
+
+    // Used to freeze the player, used when pausing the game
+    public void FreezeMovement()
+    {
+        frozen = true;
+
+        Cursor.lockState = CursorLockMode.None;
     }
 
     //Removes the effects of the FreezeMovement() method
